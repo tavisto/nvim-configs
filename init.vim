@@ -1,19 +1,66 @@
-packadd minpac
-call minpac#init()
+" For a paranoia.
+" Normally `:set nocp` is not needed, because it is done automatically
+" when .vimrc is found.
+if &compatible
+  " `:set nocp` has many side effects. Therefore this should be done
+  " only when 'compatible' is set.
+  set nocompatible
+endif
 
-call minpac#add('junegunn/fzf')
-call minpac#add('junegunn/fzf.vim')
-call minpac#add('k-takata/minpac', {'type': 'opt'})
+if exists('*minpac#init')
+  " minpac is loaded.
+  call minpac#init()
+  call minpac#add('k-takata/minpac', {'type': 'opt'})
 
+  " Additional plugins here.
+  call minpac#add('junegunn/fzf')
+  call minpac#add('junegunn/fzf.vim')
 
-" Themes
-call minpac#add('whatyouhide/vim-gotham')
+  call minpac#add('scrooloose/nerdtree')
+  call minpac#add('Xuyuanp/nerdtree-git-plugin')
+
+  " Languages
+  call minpac#add('sheerun/vim-polyglot')
+  call minpac#add('hashivim/vim-hashicorp-tools')
+  call minpac#add('voxpupuli/vim-puppet')
+  call minpac#add('nathanielc/vim-tickscript')
+
+  " Themes
+  call minpac#add('whatyouhide/vim-gotham')
+
+  " Syntax highligting
+  call minpac#add('w0rp/ale')
+
+  " The Tim Pope Section
+  call minpac#add('tpope/vim-abolish')
+  call minpac#add('tpope/vim-fugitive')
+  call minpac#add('tpope/vim-projectionist', {'type': 'opt'})
+  call minpac#add('tpope/vim-repeat')
+  call minpac#add('tpope/vim-scriptease', {'type': 'opt'})
+  call minpac#add('tpope/vim-surround')
+  call minpac#add('tpope/vim-unimpaired')
+  call minpac#add('tpope/vim-commentary')
+
+  call minpac#add('mbbill/undotree')
+  
+  " Make the status line pretty
+  call minpac#add('vim-airline/vim-airline')
+  call minpac#add('vim-airline/vim-airline-themes')
+
+  " Call in the Grepper
+  call minpac#add('mhinz/vim-grepper')
+
+endif
+
+" Define user commands for updating/cleaning the plugins.
+" Each of them loads minpac, reloads .vimrc to register the
+" information of plugins, then performs the task.
+command! PackUpdate packadd minpac | source $MYVIMRC | call minpac#update()
+command! PackClean  packadd minpac | source $MYVIMRC | call minpac#clean()
+
 " Set the background to dark
 set background=dark
 colorscheme gotham
-
-" Syntax highligting
-call minpac#add('w0rp/ale')
 
 " Mappings for ALE
 nmap <silent> [W <Plug>(ale_first)
@@ -21,8 +68,6 @@ nmap <silent> [w <Plug>(ale_previous)
 nmap <silent> ]w <Plug>(ale_next)
 nmap <silent> ]W <Plug>(ale_last)
 
-" Call in the Dr. Grepper
-call minpac#add('mhinz/vim-grepper')
 let g:grepper = {}
 let g:grepper.tools = ['rg','git', 'grep']
 
@@ -44,16 +89,6 @@ function! SetupCommandAlias(input, output)
 endfunction
 call SetupCommandAlias("grep", "GrepperGrep")
 
-" The Tim Pope Section
-call minpac#add('tpope/vim-abolish')
-call minpac#add('tpope/vim-fugitive')
-" call minpac#add('tpope/vim-projectionist')
-call minpac#add('tpope/vim-repeat')
-call minpac#add('tpope/vim-scriptease', {'type': 'opt'})
-call minpac#add('tpope/vim-surround')
-call minpac#add('tpope/vim-unimpaired')
-
-call minpac#add('mbbill/undotree')
 if has("persistent_undo")
     set undodir=~/.config/nvim/runtime/undo/
     set undofile
@@ -71,7 +106,7 @@ set wildmenu
 "   Complete longest common string, then list alternatives.
 set wildmode=longest,list,full
 
-set mouse=a
+set mouse=n
 
 
 " Insert mode completion options
@@ -90,9 +125,6 @@ set laststatus=2
 set scrolloff=3
 set scrolljump=5 " Set the scroll jump to be 5 lines
 
-" Make the status line pretty
-call minpac#add('vim-airline/vim-airline')
-call minpac#add('vim-airline/vim-airline-themes')
 
 " Airline Config
 let g:airline_detect_paste=1
@@ -108,3 +140,64 @@ let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
 let g:airline_symbols.whitespace = 'Ξ'
+
+"
+" Key Mappings
+"
+
+" switch to upper/lower window quickly
+map <C-J> <C-W>j
+map <C-K> <C-W>k
+map <C-H> <C-W>h
+map <C-L> <C-W>l
+
+" F1 reserved for help
+
+" Toggle NERDTree
+nmap <silent> <F2> :NERDTreeToggle<CR>
+nmap <silent> <leader><F2> :NERDTreeFind<CR>
+
+" Toggle search highlight
+nmap <silent> <F3> :set hls!<CR>
+
+" Rerun last : command
+nmap <silent> <F4> :UndotreeToggle<CR>
+
+" Use <F5> to togle comments
+nmap <silent> <F5> <Plug>NERDCommenterToggle
+vmap <silent> <F5> <Plug>NERDCommenterToggle
+
+" use <F6> to toggle line numbers
+nmap <silent> <F6> :set number!<CR>
+nmap <silent> <leader><F6> :set relativenumber!<CR>
+
+" use <F7> to togle folding
+nmap <silent> <F7> zA
+
+" map <F8>
+nmap <silent> <F8> :FZF
+
+" Togle showing non printing chars
+nmap <silent> <F9> :set list!<CR>
+
+" Togle paste mode on and off with F10
+set pastetoggle=<F10>
+
+" Add current buffer to diff
+nmap <silent> <F11> :diffthis<CR>
+nmap <silent> <leader><F11> :diffoff!<CR>
+
+" Check current file
+nmap <silent> <F12> :ALELint<CR>
+" Show error window from synstastic
+nmap <silent> <leader><F12> <Plug>(ale_detail)
+
+" Map <leader>mc to count the number of matches the curren search will
+" return in the current buffer
+nmap <silent> <leader>mc :%s///gn<CR>
+
+" Fix the & command to always preserve flags on searches
+" in both normal and visual mode
+nnoremap & :&&<CR>
+xnoremap & :&&<CR>
+
