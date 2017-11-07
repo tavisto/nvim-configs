@@ -1,4 +1,4 @@
 syntax: glob
 runtime/*
-pack/minpack/*
+pack/minpac/*
 .netrwhist
