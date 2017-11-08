@@ -42,13 +42,18 @@ if exists('*minpac#init')
   call minpac#add('tpope/vim-commentary')
 
   call minpac#add('mbbill/undotree')
-  
+
   " Make the status line pretty
   call minpac#add('vim-airline/vim-airline')
   call minpac#add('vim-airline/vim-airline-themes')
 
   " Call in the Grepper
   call minpac#add('mhinz/vim-grepper')
+
+  " Complete the list
+  call minpac#add('roxma/nvim-completion-manager')
+  call minpac#add('SirVer/ultisnips')
+  call minpac#add('honza/vim-snippets')
 
 endif
 
@@ -90,13 +95,13 @@ endfunction
 call SetupCommandAlias("grep", "GrepperGrep")
 
 if has("persistent_undo")
-    set undodir=~/.config/nvim/runtime/undo/
-    set undofile
+  set undodir=~/.config/nvim/runtime/undo/
+  set undofile
 endif
 
 if exists('+backupdir')
-    set backupdir=~/.config/nvim/runtime/backup
-    set directory=~/.config/nvim/runtime/backup
+  set backupdir=~/.config/nvim/runtime/backup
+  set directory=~/.config/nvim/runtime/backup
 endif
 
 " Use menu to show command-line completion (in 'full' case)
@@ -107,6 +112,48 @@ set wildmenu
 set wildmode=longest,list,full
 
 set mouse=n
+
+" This makes vim act like all other editors, buffers can
+" exist in the background without being in a window.
+" http://items.sjbach.com/319/configuring-vim-right
+set hidden
+
+" Allow backspacing over everything
+set backspace=indent,eol,start
+
+" Remember up to 5000 'colon' commmands and search patterns
+set history=5000
+
+" Make all tabs 2 spaces
+" Make tabs delete properly
+" Make autoindent add 2 spaces per indent level
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
+set expandtab " Convert all tabs
+set smarttab
+" Don't auto wrap anything
+set nowrap " No wrapping unless I say so.
+set textwidth=0
+set linebreak " Wrap lines at convenient points
+
+set autoindent " Auto Indent
+set smartindent " Smart Indent
+
+set ignorecase
+set smartcase
+
+set nohlsearch " Don't Highlight searches
+" Always show status line, even for one window
+set laststatus=2
+
+" Enable CTRL-A/CTRL-X to work on octal and hex numbers, as well as characters
+set nrformats=octal,hex,alpha
+
+" Set the default behavior of opening a buffer to use the one already open
+set swb=useopen
+
+
 
 
 " Insert mode completion options
@@ -130,7 +177,7 @@ set scrolljump=5 " Set the scroll jump to be 5 lines
 let g:airline_detect_paste=1
 let g:airline_theme= "gotham"
 if !exists('g:airline_symbols')
-let g:airline_symbols = {}
+  let g:airline_symbols = {}
 endif
 let g:airline_left_sep = ''
 let g:airline_left_alt_sep = ''
@@ -141,9 +188,25 @@ let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
 let g:airline_symbols.whitespace = 'Ξ'
 
+" Snippits Configs
+" Trigger configuration. Do not use <tab> if you use
+" https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+
+
 "
 " Key Mappings
 "
+
+" Bubble single lines
+nmap <C-k> [e
+nmap <C-j> ]e
+" " Bubble multiple lines
+vmap <C-k> [egv
+vmap <C-j> ]egv
 
 " switch to upper/lower window quickly
 map <C-J> <C-W>j
@@ -201,3 +264,21 @@ nmap <silent> <leader>mc :%s///gn<CR>
 nnoremap & :&&<CR>
 xnoremap & :&&<CR>
 
+" Functions!
+
+function! Preserve(command)
+  " Preparation: save last search, and cursor position.
+  let _s=@/
+  let l = line(".")
+  let c = col(".")
+  " Do the business:
+  execute a:command
+  " Clean up: restore previous search history, and cursor position
+  let @/=_s
+  call cursor(l, c)
+endfunction
+
+nmap <leader>$ :call Preserve("%s/\\s\\+$//e")<CR>
+nmap <leader>= :call Preserve("normal gg=G")<CR>
+
+au BufRead,BufNewFile *.pp   setfiletype puppet
