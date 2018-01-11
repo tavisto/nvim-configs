@@ -4,10 +4,10 @@ My neovim setup
 
 Notes:
 
-# Movin
+# Move in
 ```
     brew install fzf
-    pip install neovim
+    pip2 install --user neovim
     pip3 install --user neovim jedi psutil setproctitle
     gem install neovim
     git clone https://github.com/k-takata/minpac.git ~/.config/nvim/pack/minpac/opt/minpac

@@ -102,7 +102,7 @@ function! SetupCommandAlias(input, output)
         \ .' ((getcmdtype() is# ":" && getcmdline() is# "'.a:input.'")'
         \ .'? ("'.a:output.'") : ("'.a:input.'"))'
 endfunction
-call SetupCommandAlias("grep", "GrepperGrep")
+call SetupCommandAlias("grep", "GrepperRg")
 
 if has("persistent_undo")
   set undodir=~/.config/nvim/runtime/undo/
@@ -290,6 +290,9 @@ endfunction
 
 nmap <leader>$ :call Preserve("%s/\\s\\+$//e")<CR>
 nmap <leader>= :call Preserve("normal gg=G")<CR>
+
+" Fill date with current timestamp
+nnoremap <leader>fd "=strftime("%Y-%m-%dT%T%z")<CR>p
 
 au BufRead,BufNewFile *.pp   setfiletype puppet
 
