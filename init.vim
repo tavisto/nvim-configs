@@ -16,6 +16,7 @@ if exists('*minpac#init')
   call minpac#add('junegunn/fzf')
   call minpac#add('junegunn/fzf.vim')
   call minpac#add('junegunn/vim-easy-align')
+  call minpac#add('Townk/vim-autoclose')
 
   call minpac#add('mtth/scratch.vim')
 
@@ -24,9 +25,11 @@ if exists('*minpac#init')
 
   " Languages
   call minpac#add('sheerun/vim-polyglot')
+  call minpac#add('fatih/vim-go')
   call minpac#add('hashivim/vim-hashicorp-tools')
   call minpac#add('voxpupuli/vim-puppet')
   call minpac#add('nathanielc/vim-tickscript')
+  call minpac#add('zchee/deoplete-jedi')
 
   " Themes
   call minpac#add('whatyouhide/vim-gotham')
@@ -54,11 +57,12 @@ if exists('*minpac#init')
   call minpac#add('mhinz/vim-grepper')
 
   " Complete the list
-  call minpac#add('roxma/nvim-completion-manager')
+  call minpac#add('Shougo/deoplete.nvim')
   call minpac#add('SirVer/ultisnips')
   call minpac#add('honza/vim-snippets')
 
 endif
+let g:deoplete#enable_at_startup = 1
 
 " Define user commands for updating/cleaning the plugins.
 " Each of them loads minpac, reloads .vimrc to register the
