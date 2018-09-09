@@ -16,7 +16,6 @@ if exists('*minpac#init')
   call minpac#add('junegunn/fzf')
   call minpac#add('junegunn/fzf.vim')
   call minpac#add('junegunn/vim-easy-align')
-  call minpac#add('Townk/vim-autoclose')
 
   call minpac#add('mtth/scratch.vim')
 
