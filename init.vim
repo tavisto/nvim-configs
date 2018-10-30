@@ -17,18 +17,38 @@ if exists('*minpac#init')
   call minpac#add('junegunn/fzf.vim')
   call minpac#add('junegunn/vim-easy-align')
 
+  call minpac#add('vim-scripts/AnsiEsc.vim')
+  call minpac#add('vim-scripts/cecutil')
+
   call minpac#add('mtth/scratch.vim')
 
   call minpac#add('scrooloose/nerdtree')
   call minpac#add('Xuyuanp/nerdtree-git-plugin')
 
   " Languages
-  call minpac#add('sheerun/vim-polyglot')
+  call minpac#add('CH-DanReif/haproxy.vim')
+  call minpac#add('chr4/nginx.vim')
+  call minpac#add('ekalinin/Dockerfile.vim')
+  call minpac#add('elzr/vim-json')
   call minpac#add('fatih/vim-go')
   call minpac#add('hashivim/vim-hashicorp-tools')
-  call minpac#add('voxpupuli/vim-puppet')
+  call minpac#add('hashivim/vim-terraform')
+  call minpac#add('martinda/Jenkinsfile-vim-syntax')
+  call minpac#add('mustache/vim-mustache-handlebars')
   call minpac#add('nathanielc/vim-tickscript')
-  call minpac#add('zchee/deoplete-jedi')
+  call minpac#add('othree/html5.vim')
+  call minpac#add('pearofducks/ansible-vim')
+  call minpac#add('plasticboy/vim-markdown')
+  call minpac#add('sebdah/vim-delve')
+  call minpac#add('sheerun/rspec.vim')
+  call minpac#add('vim-ruby/vim-ruby')
+  call minpac#add('vim-scripts/groovy.vim')
+  call minpac#add('voxpupuli/vim-puppet')
+  call minpac#add('wgwoods/vim-systemd-syntax')
+  call minpac#add('tbastos/vim-lua')
+  call minpac#add('Vimjas/vim-python-pep8-indent')
+  call minpac#add('vim-python/python-syntax')
+  call minpac#add('cespare/vim-toml')
 
   " Themes
   call minpac#add('whatyouhide/vim-gotham')
@@ -38,14 +58,15 @@ if exists('*minpac#init')
 
   " The Tim Pope Section
   call minpac#add('tpope/vim-abolish')
+  call minpac#add('tpope/vim-commentary')
+  call minpac#add('tpope/vim-cucumber')
   call minpac#add('tpope/vim-fugitive')
+  call minpac#add('tpope/vim-git')
   call minpac#add('tpope/vim-projectionist', {'type': 'opt'})
   call minpac#add('tpope/vim-repeat')
   call minpac#add('tpope/vim-scriptease', {'type': 'opt'})
   call minpac#add('tpope/vim-surround')
   call minpac#add('tpope/vim-unimpaired')
-  call minpac#add('tpope/vim-commentary')
-
   call minpac#add('mbbill/undotree')
 
   " Make the status line pretty
@@ -57,11 +78,11 @@ if exists('*minpac#init')
 
   " Complete the list
   call minpac#add('Shougo/deoplete.nvim')
+  call minpac#add('zchee/deoplete-jedi')
   call minpac#add('SirVer/ultisnips')
   call minpac#add('honza/vim-snippets')
 
 endif
-let g:deoplete#enable_at_startup = 1
 
 " Define user commands for updating/cleaning the plugins.
 " Each of them loads minpac, reloads .vimrc to register the
@@ -78,6 +99,14 @@ nmap <silent> [W <Plug>(ale_first)
 nmap <silent> [w <Plug>(ale_previous)
 nmap <silent> ]w <Plug>(ale_next)
 nmap <silent> ]W <Plug>(ale_last)
+
+" Error and warning signs.
+let g:ale_sign_error = '⤫'
+let g:ale_sign_warning = '⚠'
+
+" Enable integration with airline.
+let g:airline#extensions#ale#enabled = 1
+
 
 " Easy Align mappings
 " Start interactive EasyAlign in visual mode (e.g. vipga)
@@ -306,3 +335,31 @@ if has('nvim')
   tnoremap <Esc> <C-\><C-n>
   tnoremap <C-v><Esc> <Esc>
 endif
+
+
+
+" All things go related
+" TODO: Move these to their own file or something
+au FileType go set noexpandtab
+au FileType go set shiftwidth=4
+au FileType go set softtabstop=4
+au FileType go set tabstop=4
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_types = 1
+
+let g:go_auto_type_info = 1
+let g:go_auto_sameids = 1
+
+let g:go_fmt_command = "goimports"
+
+au Filetype go nmap <leader>ga <Plug>(go-alternate-edit)
+au Filetype go nmap <leader>gah <Plug>(go-alternate-split)
+au Filetype go nmap <leader>gav <Plug>(go-alternate-vertical)
+
+
