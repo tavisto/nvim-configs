@@ -142,6 +142,8 @@ if has("persistent_undo")
 endif
 
 if exists('+backupdir')
+  set backupdir=~/.config/nvim/runtime/backup//
+  set directory=~/.config/nvim/runtime/backup//
   " === BACKUP SETTINGS ===
   " turn backup OFF
   " Normally we would want to have it turned on. See bug and workaround below.
@@ -151,8 +153,6 @@ if exists('+backupdir')
   set nobackup
 
   " set a centralized backup directory
-  set backupdir=~/.config/nvim/runtime/backup//
-  set directory=~/.config/nvim/runtime/backup//
 
   " This is the workaround for the backup filename expansion problem.
   autocmd BufWritePre * :call SaveBackups()
