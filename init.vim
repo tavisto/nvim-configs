@@ -142,8 +142,43 @@ if has("persistent_undo")
 endif
 
 if exists('+backupdir')
-  set backupdir=~/.config/nvim/runtime/backup
-  set directory=~/.config/nvim/runtime/backup
+  " === BACKUP SETTINGS ===
+  " turn backup OFF
+  " Normally we would want to have it turned on. See bug and workaround below.
+  " OBS: It's a known-bug that backupdir is not supporting
+  " the correct double slash filename expansion
+  " see: https://code.google.com/p/vim/issues/detail?id=179
+  set nobackup
+
+  " set a centralized backup directory
+  set backupdir=~/.config/nvim/runtime/backup//
+  set directory=~/.config/nvim/runtime/backup//
+
+  " This is the workaround for the backup filename expansion problem.
+  autocmd BufWritePre * :call SaveBackups()
+
+  function! SaveBackups()
+    if expand('%:p') =~ &backupskip | return | endif
+
+    " If this is a newly created file, don't try to create a backup
+    if !filereadable(@%) | return | endif
+
+    for l:backupdir in split(&backupdir, ',')
+      :call SaveBackup(l:backupdir)
+    endfor
+  endfunction
+
+  function! SaveBackup(backupdir)
+    let l:filename = expand('%:p')
+    if a:backupdir =~ '//$'
+      let l:backup = escape(substitute(l:filename, '/', '%', 'g')  . &backupext, '%')
+    else
+      let l:backup = escape(expand('%') .  &backupext, '%')
+    endif
+
+    let l:backup_path = a:backupdir . l:backup
+    :silent! execute '!cp' .  resolve(l:filename) . ' ' .  l:backup_path
+  endfunction
 endif
 
 " Use menu to show command-line completion (in 'full' case)
@@ -269,8 +304,8 @@ nmap <silent> <F3> :set hls!<CR>
 nmap <silent> <F4> :UndotreeToggle<CR>
 
 " Use <F5> to togle comments
-nmap <silent> <F5> <Plug>NERDCommenterToggle
-vmap <silent> <F5> <Plug>NERDCommenterToggle
+nmap <silent> <F5> <Plug>Commentary
+vmap <silent> <F5> <Plug>Commentary
 
 " use <F6> to toggle line numbers
 nmap <silent> <F6> :set number!<CR>
