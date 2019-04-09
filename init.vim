@@ -82,6 +82,9 @@ if exists('*minpac#init')
   call minpac#add('SirVer/ultisnips')
   call minpac#add('honza/vim-snippets')
 
+  " Taskwarrior
+  call minpac#add('farseer90718/vim-taskwarrior')
+
 endif
 
 " Define user commands for updating/cleaning the plugins.
