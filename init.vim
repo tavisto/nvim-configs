@@ -341,6 +341,14 @@ set pastetoggle=<F10>
 nmap <silent> <F11> :diffthis<CR>
 nmap <silent> <leader><F11> :diffoff!<CR>
 
+" Check current file
+nmap <silent> <F12> :ALELint<CR>
+" Show error window from synstastic
+nmap <silent> <leader><F12> <Plug>(ale_detail)
+" Put the error list into the quickfix window
+let g:ale_set_loclist = 0
+let g:ale_set_quickfix = 1
+let g:ale_open_list = 1
 
 " Map <leader>mc to count the number of matches the curren search will
 " return in the current buffer
