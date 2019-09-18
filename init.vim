@@ -13,58 +13,53 @@ if exists('*minpac#init')
   call minpac#add('k-takata/minpac', {'type': 'opt'})
 
   " Additional plugins here.
-  call minpac#add('junegunn/fzf')
-  call minpac#add('junegunn/fzf.vim')
+  " call minpac#add('junegunn/fzf')
+  " call minpac#add('junegunn/fzf.vim')
   call minpac#add('junegunn/vim-easy-align')
 
   call minpac#add('vim-scripts/AnsiEsc.vim')
   call minpac#add('vim-scripts/cecutil')
 
-  call minpac#add('mtth/scratch.vim')
+  " call minpac#add('mtth/scratch.vim')
 
   call minpac#add('scrooloose/nerdtree')
   call minpac#add('Xuyuanp/nerdtree-git-plugin')
 
   " Languages
-  call minpac#add('CH-DanReif/haproxy.vim')
-  call minpac#add('chr4/nginx.vim')
+  " call minpac#add('CH-DanReif/haproxy.vim')
+  " call minpac#add('chr4/nginx.vim')
   call minpac#add('ekalinin/Dockerfile.vim')
-  call minpac#add('elzr/vim-json')
-  call minpac#add('vim-scripts/groovy.vim')
-  call minpac#add('wgwoods/vim-systemd-syntax')
-  call minpac#add('tbastos/vim-lua')
+  " call minpac#add('elzr/vim-json')
+  " call minpac#add('vim-scripts/groovy.vim')
+  " call minpac#add('wgwoods/vim-systemd-syntax')
+  " call minpac#add('tbastos/vim-lua')
 
   " Go
-  call minpac#add('fatih/vim-go')
+  " call minpac#add('fatih/vim-go')
 
-  call minpac#add('hashivim/vim-hashicorp-tools')
-  call minpac#add('hashivim/vim-terraform')
-  call minpac#add('martinda/Jenkinsfile-vim-syntax')
-  call minpac#add('mustache/vim-mustache-handlebars')
-  call minpac#add('nathanielc/vim-tickscript')
-  call minpac#add('othree/html5.vim')
-  call minpac#add('pearofducks/ansible-vim')
-  call minpac#add('plasticboy/vim-markdown')
-  call minpac#add('sebdah/vim-delve')
+  " call minpac#add('hashivim/vim-hashicorp-tools')
+  " call minpac#add('hashivim/vim-terraform')
+  " call minpac#add('martinda/Jenkinsfile-vim-syntax')
+  " call minpac#add('mustache/vim-mustache-handlebars')
+  " call minpac#add('nathanielc/vim-tickscript')
+  " call minpac#add('othree/html5.vim')
+  " call minpac#add('pearofducks/ansible-vim')
+  " call minpac#add('plasticboy/vim-markdown')
+  " call minpac#add('sebdah/vim-delve')
 
   " Ruby
-  call minpac#add('sheerun/rspec.vim')
-  call minpac#add('vim-ruby/vim-ruby')
+  " call minpac#add('sheerun/rspec.vim')
+  " call minpac#add('vim-ruby/vim-ruby')
 
   " Puppet
-  call minpac#add('rodjek/vim-puppet')
-  call minpac#add('farkasmate/epp-syntax-vim')
+  " call minpac#add('rodjek/vim-puppet')
+  " call minpac#add('farkasmate/epp-syntax-vim')
 
 
   " Python
-  call minpac#add('Vimjas/vim-python-pep8-indent')
-  call minpac#add('vim-python/python-syntax')
-  call minpac#add('cespare/vim-toml')
-
-  " Themes
-  call minpac#add('whatyouhide/vim-gotham')
-  call minpac#add('dracula/vim', { 'name': 'theme-dracula'})
-
+  " call minpac#add('Vimjas/vim-python-pep8-indent')
+  " call minpac#add('vim-python/python-syntax')
+  " call minpac#add('cespare/vim-toml')
 
   " Syntax highligting
   call minpac#add('w0rp/ale')
@@ -99,6 +94,9 @@ if exists('*minpac#init')
 endif
 
 " Coc stuff:
+" Extensions
+let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-yaml', 'coc-lists', 'coc-snippets', 'coc-go', 'coc-docker', 'coc-syntax', 'coc-dictionary']
+
 " Use <C-l> for trigger snippet expand.
 imap <C-l> <Plug>(coc-snippets-expand)
 
@@ -126,6 +124,11 @@ function! s:check_back_space() abort
 endfunction
 
 let g:coc_snippet_next = '<tab>'
+
+" use <c-space>for trigger completion
+inoremap <silent><expr> <c-space> coc#refresh()
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 
 " Define user commands for updating/cleaning the plugins.
@@ -285,9 +288,6 @@ set nrformats=octal,hex,alpha
 " Set the default behavior of opening a buffer to use the one already open
 set swb=useopen
 
-
-
-
 " Insert mode completion options
 set completeopt=menu,menuone,preview
 
@@ -297,9 +297,6 @@ set completeopt=menu,menuone,preview
 " autocmd WinEnter * match WhiteSpaceEOL /^\s*\ \s*\|\s\+$/
 set listchars=tab:▶-,eol:¬,trail:-
 
-" Always show status line, even for one window
-set laststatus=2
-
 " Scroll when cursor gets within 3 characters of top/bottom edge
 set scrolloff=3
 set scrolljump=5 " Set the scroll jump to be 5 lines
@@ -307,7 +304,6 @@ set scrolljump=5 " Set the scroll jump to be 5 lines
 
 " Airline Config
 let g:airline_detect_paste=1
-" let g:airline_theme= "gotham"
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
@@ -319,14 +315,6 @@ let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
 let g:airline_symbols.whitespace = 'Ξ'
-
-" Snippits Configs
-" Trigger configuration. Do not use <tab> if you use
-" https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
 
 
 "
