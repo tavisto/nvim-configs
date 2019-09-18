@@ -30,7 +30,13 @@ if exists('*minpac#init')
   call minpac#add('chr4/nginx.vim')
   call minpac#add('ekalinin/Dockerfile.vim')
   call minpac#add('elzr/vim-json')
+  call minpac#add('vim-scripts/groovy.vim')
+  call minpac#add('wgwoods/vim-systemd-syntax')
+  call minpac#add('tbastos/vim-lua')
+
+  " Go
   call minpac#add('fatih/vim-go')
+
   call minpac#add('hashivim/vim-hashicorp-tools')
   call minpac#add('hashivim/vim-terraform')
   call minpac#add('martinda/Jenkinsfile-vim-syntax')
@@ -40,18 +46,26 @@ if exists('*minpac#init')
   call minpac#add('pearofducks/ansible-vim')
   call minpac#add('plasticboy/vim-markdown')
   call minpac#add('sebdah/vim-delve')
+
+  " Ruby
   call minpac#add('sheerun/rspec.vim')
   call minpac#add('vim-ruby/vim-ruby')
-  call minpac#add('vim-scripts/groovy.vim')
-  call minpac#add('voxpupuli/vim-puppet')
-  call minpac#add('wgwoods/vim-systemd-syntax')
-  call minpac#add('tbastos/vim-lua')
+
+  " Puppet
+  call minpac#add('rodjek/vim-puppet')
+  call minpac#add('farkasmate/epp-syntax-vim')
+
+
+  " Python
   call minpac#add('Vimjas/vim-python-pep8-indent')
   call minpac#add('vim-python/python-syntax')
   call minpac#add('cespare/vim-toml')
+  call minpac#add('zchee/deoplete-jedi')
 
   " Themes
   call minpac#add('whatyouhide/vim-gotham')
+  call minpac#add('dracula/vim', { 'name': 'theme-dracula'})
+
 
   " Syntax highligting
   call minpac#add('w0rp/ale')
@@ -78,7 +92,6 @@ if exists('*minpac#init')
 
   " Complete the list
   call minpac#add('Shougo/deoplete.nvim')
-  call minpac#add('zchee/deoplete-jedi')
   call minpac#add('SirVer/ultisnips')
   call minpac#add('honza/vim-snippets')
 
@@ -94,8 +107,8 @@ command! PackUpdate packadd minpac | source $MYVIMRC | call minpac#update()
 command! PackClean  packadd minpac | source $MYVIMRC | call minpac#clean()
 
 " Set the background to dark
-set background=dark
-colorscheme gotham
+" set background=dark
+" colorscheme gotham
 
 " Mappings for ALE
 nmap <silent> [W <Plug>(ale_first)
@@ -106,13 +119,13 @@ nmap <silent> ]W <Plug>(ale_last)
 " Check current file
 nmap <silent> <F12> :ALELint<CR>
 
-" Show error window from synstastic
+" Show error window from ALE
 nmap <silent> <leader><F12> <Plug>(ale_detail)
 
-" Put the error list into the quickfix window
-let g:ale_set_loclist = 0
-let g:ale_set_quickfix = 1
-let g:ale_open_list = 0
+" Put the error list into the local list window
+let g:ale_set_loclist = 1
+let g:ale_set_quickfix = 0
+let g:ale_open_list = 1
 
 " Error and warning signs.
 let g:ale_sign_error = '⤫'
@@ -266,7 +279,7 @@ set scrolljump=5 " Set the scroll jump to be 5 lines
 
 " Airline Config
 let g:airline_detect_paste=1
-let g:airline_theme= "gotham"
+" let g:airline_theme= "gotham"
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
@@ -341,7 +354,6 @@ set pastetoggle=<F10>
 nmap <silent> <F11> :diffthis<CR>
 nmap <silent> <leader><F11> :diffoff!<CR>
 
-
 " Map <leader>mc to count the number of matches the curren search will
 " return in the current buffer
 nmap <silent> <leader>mc :%s///gn<CR>
@@ -380,7 +392,6 @@ if has('nvim')
   tnoremap <Esc> <C-\><C-n>
   tnoremap <C-v><Esc> <Esc>
 endif
-
 
 
 " All things go related
