@@ -13,8 +13,8 @@ if exists('*minpac#init')
   call minpac#add('k-takata/minpac', {'type': 'opt'})
 
   " Additional plugins here.
-  " call minpac#add('junegunn/fzf')
-  " call minpac#add('junegunn/fzf.vim')
+  call minpac#add('junegunn/fzf')
+  call minpac#add('junegunn/fzf.vim')
   call minpac#add('junegunn/vim-easy-align')
 
   call minpac#add('vim-scripts/AnsiEsc.vim')
@@ -35,31 +35,31 @@ if exists('*minpac#init')
   " call minpac#add('tbastos/vim-lua')
 
   " Go
-  " call minpac#add('fatih/vim-go')
+  call minpac#add('fatih/vim-go')
+  call minpac#add('sebdah/vim-delve')
 
-  " call minpac#add('hashivim/vim-hashicorp-tools')
-  " call minpac#add('hashivim/vim-terraform')
+  call minpac#add('hashivim/vim-hashicorp-tools')
+  call minpac#add('hashivim/vim-terraform')
   " call minpac#add('martinda/Jenkinsfile-vim-syntax')
   " call minpac#add('mustache/vim-mustache-handlebars')
   " call minpac#add('nathanielc/vim-tickscript')
   " call minpac#add('othree/html5.vim')
-  " call minpac#add('pearofducks/ansible-vim')
-  " call minpac#add('plasticboy/vim-markdown')
-  " call minpac#add('sebdah/vim-delve')
+  call minpac#add('pearofducks/ansible-vim')
+  call minpac#add('plasticboy/vim-markdown')
 
   " Ruby
-  " call minpac#add('sheerun/rspec.vim')
-  " call minpac#add('vim-ruby/vim-ruby')
+  call minpac#add('sheerun/rspec.vim')
+  call minpac#add('vim-ruby/vim-ruby')
 
   " Puppet
-  " call minpac#add('rodjek/vim-puppet')
-  " call minpac#add('farkasmate/epp-syntax-vim')
+  call minpac#add('rodjek/vim-puppet')
+  call minpac#add('farkasmate/epp-syntax-vim')
 
 
   " Python
   " call minpac#add('Vimjas/vim-python-pep8-indent')
   " call minpac#add('vim-python/python-syntax')
-  " call minpac#add('cespare/vim-toml')
+  call minpac#add('cespare/vim-toml')
 
   " Syntax highligting
   call minpac#add('w0rp/ale')
@@ -111,24 +111,6 @@ let g:coc_snippet_prev = '<c-k>'
 
 " Use <C-j> for both expand and jump (make expand higher priority.)
 imap <C-j> <Plug>(coc-snippets-expand-jump)
-
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? coc#_select_confirm() :
-      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-let g:coc_snippet_next = '<tab>'
-
-" use <c-space>for trigger completion
-inoremap <silent><expr> <c-space> coc#refresh()
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 
 " Define user commands for updating/cleaning the plugins.
@@ -321,9 +303,6 @@ let g:airline_symbols.whitespace = 'Ξ'
 " Key Mappings
 "
 
-" Bubble single lines
-nmap <C-k> [e
-nmap <C-j> ]e
 " " Bubble multiple lines
 vmap <C-k> [egv
 vmap <C-j> ]egv
@@ -433,5 +412,3 @@ let g:go_fmt_command = "goimports"
 au Filetype go nmap <leader>ga <Plug>(go-alternate-edit)
 au Filetype go nmap <leader>gah <Plug>(go-alternate-split)
 au Filetype go nmap <leader>gav <Plug>(go-alternate-vertical)
-
-
