@@ -1,0 +1,11 @@
+PyYAML
+autopep8
+flake8
+jedi
+neovim
+pep8
+psutil
+pycodestyle
+pyflakes
+pynvim
+setproctitle

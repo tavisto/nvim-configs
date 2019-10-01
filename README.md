@@ -7,8 +7,10 @@ Notes:
 # Move in
 ```
     brew install fzf
+    brew install nvm
+    nvm install 12
     pip2 install --user neovim
-    pip3 install --user neovim jedi psutil setproctitle
+    pip3 install --user -r requirements.txt
     gem install neovim
     git clone https://github.com/k-takata/minpac.git ~/.config/nvim/pack/minpac/opt/minpac
 ```

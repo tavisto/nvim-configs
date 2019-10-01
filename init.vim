@@ -26,13 +26,12 @@ if exists('*minpac#init')
   call minpac#add('Xuyuanp/nerdtree-git-plugin')
 
   " Languages
-  " call minpac#add('CH-DanReif/haproxy.vim')
-  " call minpac#add('chr4/nginx.vim')
+  call minpac#add('CH-DanReif/haproxy.vim')
+  call minpac#add('chr4/nginx.vim')
   call minpac#add('ekalinin/Dockerfile.vim')
-  " call minpac#add('elzr/vim-json')
-  " call minpac#add('vim-scripts/groovy.vim')
-  " call minpac#add('wgwoods/vim-systemd-syntax')
-  " call minpac#add('tbastos/vim-lua')
+  call minpac#add('vim-scripts/groovy.vim')
+  call minpac#add('wgwoods/vim-systemd-syntax')
+  call minpac#add('tbastos/vim-lua')
 
   " Go
   call minpac#add('fatih/vim-go')
@@ -57,8 +56,8 @@ if exists('*minpac#init')
 
 
   " Python
-  " call minpac#add('Vimjas/vim-python-pep8-indent')
-  " call minpac#add('vim-python/python-syntax')
+  call minpac#add('Vimjas/vim-python-pep8-indent')
+  call minpac#add('vim-python/python-syntax')
   call minpac#add('cespare/vim-toml')
 
   " Syntax highligting
@@ -95,7 +94,7 @@ endif
 
 " Coc stuff:
 " Extensions
-let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-yaml', 'coc-lists', 'coc-snippets', 'coc-go', 'coc-docker', 'coc-syntax', 'coc-dictionary']
+let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-yaml', 'coc-lists', 'coc-snippets', 'coc-go', 'coc-docker', 'coc-syntax', 'coc-dictionary', 'coc-python']
 
 " Use <C-l> for trigger snippet expand.
 imap <C-l> <Plug>(coc-snippets-expand)
