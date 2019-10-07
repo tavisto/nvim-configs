@@ -32,6 +32,7 @@ if exists('*minpac#init')
   call minpac#add('vim-scripts/groovy.vim')
   call minpac#add('wgwoods/vim-systemd-syntax')
   call minpac#add('tbastos/vim-lua')
+  call minpac#add('google/vim-jsonnet')
 
   " Go
   call minpac#add('fatih/vim-go')
@@ -39,10 +40,10 @@ if exists('*minpac#init')
 
   call minpac#add('hashivim/vim-hashicorp-tools')
   call minpac#add('hashivim/vim-terraform')
-  " call minpac#add('martinda/Jenkinsfile-vim-syntax')
-  " call minpac#add('mustache/vim-mustache-handlebars')
-  " call minpac#add('nathanielc/vim-tickscript')
-  " call minpac#add('othree/html5.vim')
+  call minpac#add('martinda/Jenkinsfile-vim-syntax')
+  call minpac#add('mustache/vim-mustache-handlebars')
+  call minpac#add('nathanielc/vim-tickscript')
+  call minpac#add('othree/html5.vim')
   call minpac#add('pearofducks/ansible-vim')
   call minpac#add('plasticboy/vim-markdown')
 
@@ -90,6 +91,9 @@ if exists('*minpac#init')
   " Taskwarrior
   call minpac#add('farseer90718/vim-taskwarrior')
 
+  " Colors
+  call minpac#add('cocopon/iceberg.vim')
+
 endif
 
 " Coc stuff:
@@ -118,9 +122,8 @@ imap <C-j> <Plug>(coc-snippets-expand-jump)
 command! PackUpdate packadd minpac | source $MYVIMRC | call minpac#update()
 command! PackClean  packadd minpac | source $MYVIMRC | call minpac#clean()
 
-" Set the background to dark
-" set background=dark
-" colorscheme gotham
+colorscheme iceberg
+set termguicolors
 
 " Mappings for ALE
 nmap <silent> [W <Plug>(ale_first)
@@ -407,6 +410,7 @@ let g:go_auto_type_info = 1
 let g:go_auto_sameids = 1
 
 let g:go_fmt_command = "goimports"
+
 
 au Filetype go nmap <leader>ga <Plug>(go-alternate-edit)
 au Filetype go nmap <leader>gah <Plug>(go-alternate-split)
