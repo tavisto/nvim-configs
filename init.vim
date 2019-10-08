@@ -20,7 +20,7 @@ if exists('*minpac#init')
   call minpac#add('vim-scripts/AnsiEsc.vim')
   call minpac#add('vim-scripts/cecutil')
 
-  call minpac#add('mtth/scratch.vim')
+  " call minpac#add('mtth/scratch.vim')
 
   call minpac#add('scrooloose/nerdtree')
   call minpac#add('Xuyuanp/nerdtree-git-plugin')
@@ -29,13 +29,14 @@ if exists('*minpac#init')
   call minpac#add('CH-DanReif/haproxy.vim')
   call minpac#add('chr4/nginx.vim')
   call minpac#add('ekalinin/Dockerfile.vim')
-  call minpac#add('elzr/vim-json')
   call minpac#add('vim-scripts/groovy.vim')
   call minpac#add('wgwoods/vim-systemd-syntax')
   call minpac#add('tbastos/vim-lua')
+  call minpac#add('google/vim-jsonnet')
 
   " Go
   call minpac#add('fatih/vim-go')
+  call minpac#add('sebdah/vim-delve')
 
   call minpac#add('hashivim/vim-hashicorp-tools')
   call minpac#add('hashivim/vim-terraform')
@@ -45,7 +46,6 @@ if exists('*minpac#init')
   call minpac#add('othree/html5.vim')
   call minpac#add('pearofducks/ansible-vim')
   call minpac#add('plasticboy/vim-markdown')
-  call minpac#add('sebdah/vim-delve')
 
   " Ruby
   call minpac#add('sheerun/rspec.vim')
@@ -61,11 +61,6 @@ if exists('*minpac#init')
   call minpac#add('vim-python/python-syntax')
   call minpac#add('cespare/vim-toml')
   call minpac#add('zchee/deoplete-jedi')
-
-  " Themes
-  call minpac#add('whatyouhide/vim-gotham')
-  call minpac#add('dracula/vim', { 'name': 'theme-dracula'})
-
 
   " Syntax highligting
   call minpac#add('w0rp/ale')
@@ -91,14 +86,37 @@ if exists('*minpac#init')
   call minpac#add('mhinz/vim-grepper')
 
   " Complete the list
-  call minpac#add('Shougo/deoplete.nvim')
-  call minpac#add('SirVer/ultisnips')
   call minpac#add('honza/vim-snippets')
+  call minpac#add('neoclide/coc.nvim', { 'rev': 'release' })
 
   " Taskwarrior
   call minpac#add('farseer90718/vim-taskwarrior')
 
+  " Colors
+  call minpac#add('cocopon/iceberg.vim')
+  call minpac#add('lifepillar/vim-solarized8')
+
 endif
+
+" Coc stuff:
+" Extensions
+let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-yaml', 'coc-lists', 'coc-snippets', 'coc-go', 'coc-docker', 'coc-syntax', 'coc-dictionary', 'coc-python']
+
+" Use <C-l> for trigger snippet expand.
+imap <C-l> <Plug>(coc-snippets-expand)
+
+" Use <C-j> for select text for visual placeholder of snippet.
+vmap <C-j> <Plug>(coc-snippets-select)
+
+" Use <C-j> for jump to next placeholder, it's default of coc.nvim
+let g:coc_snippet_next = '<c-j>'
+
+" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+let g:coc_snippet_prev = '<c-k>'
+
+" Use <C-j> for both expand and jump (make expand higher priority.)
+imap <C-j> <Plug>(coc-snippets-expand-jump)
+
 
 " Define user commands for updating/cleaning the plugins.
 " Each of them loads minpac, reloads .vimrc to register the
@@ -106,9 +124,8 @@ endif
 command! PackUpdate packadd minpac | source $MYVIMRC | call minpac#update()
 command! PackClean  packadd minpac | source $MYVIMRC | call minpac#clean()
 
-" Set the background to dark
-" set background=dark
-" colorscheme gotham
+colorscheme solarized8
+set termguicolors
 
 " Mappings for ALE
 nmap <silent> [W <Plug>(ale_first)
@@ -257,9 +274,6 @@ set nrformats=octal,hex,alpha
 " Set the default behavior of opening a buffer to use the one already open
 set swb=useopen
 
-
-
-
 " Insert mode completion options
 set completeopt=menu,menuone,preview
 
@@ -269,9 +283,6 @@ set completeopt=menu,menuone,preview
 " autocmd WinEnter * match WhiteSpaceEOL /^\s*\ \s*\|\s\+$/
 set listchars=tab:▶-,eol:¬,trail:-
 
-" Always show status line, even for one window
-set laststatus=2
-
 " Scroll when cursor gets within 3 characters of top/bottom edge
 set scrolloff=3
 set scrolljump=5 " Set the scroll jump to be 5 lines
@@ -279,7 +290,6 @@ set scrolljump=5 " Set the scroll jump to be 5 lines
 
 " Airline Config
 let g:airline_detect_paste=1
-" let g:airline_theme= "gotham"
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
@@ -292,22 +302,11 @@ let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
 let g:airline_symbols.whitespace = 'Ξ'
 
-" Snippits Configs
-" Trigger configuration. Do not use <tab> if you use
-" https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
-
 
 "
 " Key Mappings
 "
 
-" Bubble single lines
-nmap <C-k> [e
-nmap <C-j> ]e
 " " Bubble multiple lines
 vmap <C-k> [egv
 vmap <C-j> ]egv
@@ -393,7 +392,6 @@ if has('nvim')
   tnoremap <C-v><Esc> <Esc>
 endif
 
-
 " All things go related
 " TODO: Move these to their own file or something
 au FileType go set noexpandtab
@@ -414,8 +412,7 @@ let g:go_auto_sameids = 1
 
 let g:go_fmt_command = "goimports"
 
+
 au Filetype go nmap <leader>ga <Plug>(go-alternate-edit)
 au Filetype go nmap <leader>gah <Plug>(go-alternate-split)
 au Filetype go nmap <leader>gav <Plug>(go-alternate-vertical)
-
-
