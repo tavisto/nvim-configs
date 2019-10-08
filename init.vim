@@ -93,6 +93,7 @@ if exists('*minpac#init')
 
   " Colors
   call minpac#add('cocopon/iceberg.vim')
+  call minpac#add('lifepillar/vim-solarized8')
 
 endif
 
@@ -122,7 +123,7 @@ imap <C-j> <Plug>(coc-snippets-expand-jump)
 command! PackUpdate packadd minpac | source $MYVIMRC | call minpac#update()
 command! PackClean  packadd minpac | source $MYVIMRC | call minpac#clean()
 
-colorscheme iceberg
+colorscheme solarized8
 set termguicolors
 
 " Mappings for ALE
@@ -389,7 +390,6 @@ if has('nvim')
   tnoremap <Esc> <C-\><C-n>
   tnoremap <C-v><Esc> <Esc>
 endif
-
 
 " All things go related
 " TODO: Move these to their own file or something
