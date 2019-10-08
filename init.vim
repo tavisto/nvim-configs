@@ -60,6 +60,7 @@ if exists('*minpac#init')
   call minpac#add('Vimjas/vim-python-pep8-indent')
   call minpac#add('vim-python/python-syntax')
   call minpac#add('cespare/vim-toml')
+  call minpac#add('zchee/deoplete-jedi')
 
   " Syntax highligting
   call minpac#add('w0rp/ale')
