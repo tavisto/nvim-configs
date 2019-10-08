@@ -1,0 +1,21 @@
+{
+  "languageserver": {
+    "golang": {
+      "command": "gopls",
+      "rootPatterns": ["go.mod"],
+      "filetypes": ["go"]
+    },
+    "terraform": {
+      "command": "terraform-lsp",
+      "filetypes": ["terraform"],
+      "initializationOptions": {}
+    },
+    "puppet": {
+      "command": "ruby",
+      "args": ["/Users/taitken/src/github/lingua-pupuli/puppet-editor-services/puppet-languageserver","--stdio"],
+      "cwd": "/Users/taitken/src/github/lingua-pupuli/puppet-editor-services",
+      "filetypes": ["puppet"],
+      "rootPatterns": [".git/", "metadata.json"]
+    }
+  }
+}

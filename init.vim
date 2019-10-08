@@ -13,8 +13,8 @@ if exists('*minpac#init')
   call minpac#add('k-takata/minpac', {'type': 'opt'})
 
   " Additional plugins here.
-  " call minpac#add('junegunn/fzf')
-  " call minpac#add('junegunn/fzf.vim')
+  call minpac#add('junegunn/fzf')
+  call minpac#add('junegunn/fzf.vim')
   call minpac#add('junegunn/vim-easy-align')
 
   call minpac#add('vim-scripts/AnsiEsc.vim')
@@ -26,40 +26,40 @@ if exists('*minpac#init')
   call minpac#add('Xuyuanp/nerdtree-git-plugin')
 
   " Languages
-  " call minpac#add('CH-DanReif/haproxy.vim')
-  " call minpac#add('chr4/nginx.vim')
+  call minpac#add('CH-DanReif/haproxy.vim')
+  call minpac#add('chr4/nginx.vim')
   call minpac#add('ekalinin/Dockerfile.vim')
-  " call minpac#add('elzr/vim-json')
-  " call minpac#add('vim-scripts/groovy.vim')
-  " call minpac#add('wgwoods/vim-systemd-syntax')
-  " call minpac#add('tbastos/vim-lua')
+  call minpac#add('vim-scripts/groovy.vim')
+  call minpac#add('wgwoods/vim-systemd-syntax')
+  call minpac#add('tbastos/vim-lua')
+  call minpac#add('google/vim-jsonnet')
 
   " Go
-  " call minpac#add('fatih/vim-go')
+  call minpac#add('fatih/vim-go')
+  call minpac#add('sebdah/vim-delve')
 
-  " call minpac#add('hashivim/vim-hashicorp-tools')
-  " call minpac#add('hashivim/vim-terraform')
-  " call minpac#add('martinda/Jenkinsfile-vim-syntax')
-  " call minpac#add('mustache/vim-mustache-handlebars')
-  " call minpac#add('nathanielc/vim-tickscript')
-  " call minpac#add('othree/html5.vim')
-  " call minpac#add('pearofducks/ansible-vim')
-  " call minpac#add('plasticboy/vim-markdown')
-  " call minpac#add('sebdah/vim-delve')
+  call minpac#add('hashivim/vim-hashicorp-tools')
+  call minpac#add('hashivim/vim-terraform')
+  call minpac#add('martinda/Jenkinsfile-vim-syntax')
+  call minpac#add('mustache/vim-mustache-handlebars')
+  call minpac#add('nathanielc/vim-tickscript')
+  call minpac#add('othree/html5.vim')
+  call minpac#add('pearofducks/ansible-vim')
+  call minpac#add('plasticboy/vim-markdown')
 
   " Ruby
-  " call minpac#add('sheerun/rspec.vim')
-  " call minpac#add('vim-ruby/vim-ruby')
+  call minpac#add('sheerun/rspec.vim')
+  call minpac#add('vim-ruby/vim-ruby')
 
   " Puppet
-  " call minpac#add('rodjek/vim-puppet')
-  " call minpac#add('farkasmate/epp-syntax-vim')
+  call minpac#add('rodjek/vim-puppet')
+  call minpac#add('farkasmate/epp-syntax-vim')
 
 
   " Python
-  " call minpac#add('Vimjas/vim-python-pep8-indent')
-  " call minpac#add('vim-python/python-syntax')
-  " call minpac#add('cespare/vim-toml')
+  call minpac#add('Vimjas/vim-python-pep8-indent')
+  call minpac#add('vim-python/python-syntax')
+  call minpac#add('cespare/vim-toml')
 
   " Syntax highligting
   call minpac#add('w0rp/ale')
@@ -91,11 +91,15 @@ if exists('*minpac#init')
   " Taskwarrior
   call minpac#add('farseer90718/vim-taskwarrior')
 
+  " Colors
+  call minpac#add('cocopon/iceberg.vim')
+  call minpac#add('lifepillar/vim-solarized8')
+
 endif
 
 " Coc stuff:
 " Extensions
-let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-yaml', 'coc-lists', 'coc-snippets', 'coc-go', 'coc-docker', 'coc-syntax', 'coc-dictionary']
+let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-yaml', 'coc-lists', 'coc-snippets', 'coc-go', 'coc-docker', 'coc-syntax', 'coc-dictionary', 'coc-python']
 
 " Use <C-l> for trigger snippet expand.
 imap <C-l> <Plug>(coc-snippets-expand)
@@ -112,24 +116,6 @@ let g:coc_snippet_prev = '<c-k>'
 " Use <C-j> for both expand and jump (make expand higher priority.)
 imap <C-j> <Plug>(coc-snippets-expand-jump)
 
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? coc#_select_confirm() :
-      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-let g:coc_snippet_next = '<tab>'
-
-" use <c-space>for trigger completion
-inoremap <silent><expr> <c-space> coc#refresh()
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
 
 " Define user commands for updating/cleaning the plugins.
 " Each of them loads minpac, reloads .vimrc to register the
@@ -137,9 +123,8 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 command! PackUpdate packadd minpac | source $MYVIMRC | call minpac#update()
 command! PackClean  packadd minpac | source $MYVIMRC | call minpac#clean()
 
-" Set the background to dark
-" set background=dark
-" colorscheme gotham
+colorscheme solarized8
+set termguicolors
 
 " Mappings for ALE
 nmap <silent> [W <Plug>(ale_first)
@@ -321,9 +306,6 @@ let g:airline_symbols.whitespace = 'Ξ'
 " Key Mappings
 "
 
-" Bubble single lines
-nmap <C-k> [e
-nmap <C-j> ]e
 " " Bubble multiple lines
 vmap <C-k> [egv
 vmap <C-j> ]egv
@@ -409,7 +391,6 @@ if has('nvim')
   tnoremap <C-v><Esc> <Esc>
 endif
 
-
 " All things go related
 " TODO: Move these to their own file or something
 au FileType go set noexpandtab
@@ -430,8 +411,7 @@ let g:go_auto_sameids = 1
 
 let g:go_fmt_command = "goimports"
 
+
 au Filetype go nmap <leader>ga <Plug>(go-alternate-edit)
 au Filetype go nmap <leader>gah <Plug>(go-alternate-split)
 au Filetype go nmap <leader>gav <Plug>(go-alternate-vertical)
-
-
