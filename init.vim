@@ -91,9 +91,11 @@ if exists('*minpac#init')
   " Taskwarrior
   call minpac#add('farseer90718/vim-taskwarrior')
 
-  " Colors
+  " Color Themes
   call minpac#add('cocopon/iceberg.vim')
   call minpac#add('lifepillar/vim-solarized8')
+  call minpac#add('whatyouhide/vim-gotham')
+  call minpac#add('nanotech/jellybeans.vim')
 
 endif
 
@@ -123,7 +125,7 @@ imap <C-j> <Plug>(coc-snippets-expand-jump)
 command! PackUpdate packadd minpac | source $MYVIMRC | call minpac#update()
 command! PackClean  packadd minpac | source $MYVIMRC | call minpac#clean()
 
-colorscheme solarized8
+colorscheme gotham256
 set termguicolors
 
 " Mappings for ALE
