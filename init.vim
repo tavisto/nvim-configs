@@ -33,6 +33,7 @@ if exists('*minpac#init')
   call minpac#add('wgwoods/vim-systemd-syntax')
   call minpac#add('tbastos/vim-lua')
   call minpac#add('google/vim-jsonnet')
+  call minpac#add('tsandall/vim-rego')
 
   " Go
   call minpac#add('fatih/vim-go')
@@ -126,7 +127,7 @@ command! PackUpdate packadd minpac | source $MYVIMRC | call minpac#update()
 command! PackClean  packadd minpac | source $MYVIMRC | call minpac#clean()
 
 colorscheme gotham256
-set termguicolors
+" set termguicolors
 
 " Mappings for ALE
 nmap <silent> [W <Plug>(ale_first)
