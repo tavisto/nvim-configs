@@ -1,13 +1,17 @@
 {
   "languageserver": {
-    "golang": {
+    "go": {
       "command": "gopls",
       "rootPatterns": ["go.mod"],
-      "filetypes": ["go"]
+      "trace.server": "verbose",
+      "filetypes": ["go"],
+      "disable": {
+        "WorkspaceFolders": false
+      }
     },
     "terraform": {
       "command": "terraform-lsp",
-      "filetypes": ["terraform"],
+      "filetypes": ["terraform", "tf"],
       "initializationOptions": {}
     },
     "puppet": {
