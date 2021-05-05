@@ -7,7 +7,15 @@ if &compatible
   set nocompatible
 endif
 
-if exists('*minpac#init')
+" Try to load minpac.
+packadd minpac
+call minpac#init()
+
+if !exists('g:loaded_minpac')
+  " minpac is not available.
+
+  " Settings for plugin-less environment.
+else
   " minpac is loaded.
   call minpac#init()
   call minpac#add('k-takata/minpac', {'type': 'opt'})
@@ -56,14 +64,28 @@ if exists('*minpac#init')
   call minpac#add('rodjek/vim-puppet')
   call minpac#add('farkasmate/epp-syntax-vim')
 
-
   " Python
   call minpac#add('Vimjas/vim-python-pep8-indent')
   call minpac#add('vim-python/python-syntax')
   call minpac#add('cespare/vim-toml')
 
+  " Javascript
+  call minpac#add('leafgarland/typescript-vim')
+  call minpac#add('pangloss/vim-javascript')
+  call minpac#add('peitalin/vim-jsx-typescript')
+  call minpac#add('jparise/vim-graphql')
+
+  " Mermaid Diagrams
+  call minpac#add('zhaozg/vim-diagram')
+
   " Syntax highligting
   call minpac#add('w0rp/ale')
+
+  " Splunk config files and SPL
+  call minpac#add('yorokobi/vim-splunk')
+
+  " EditorConfig support
+  call minpac#add('editorconfig/editorconfig-vim')
 
   " The Tim Pope Section
   call minpac#add('tpope/vim-abolish')
@@ -343,7 +365,7 @@ nmap <silent> <F6> :set number!<CR>
 nmap <silent> <leader><F6> :set relativenumber!<CR>
 
 " use <F7> to togle folding
-nmap <silent> <F7> zA
+nmap <silent> <F7> za
 
 " map <F8>
 nmap <silent> <F8> :FZF
@@ -485,6 +507,17 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>l
 
 " disable vim-go :GoDef short cut (gd) to let coc do the work
 let g:go_def_mapping_enabled = 0
+
+let g:go_metalinter_enabled = ['deadcode' ,'errcheck' ,'gocyclo' ,'golint' ,'gosimple' ,'govet' ,'ineffassign' ,'maligned' ,'staticcheck' ,'structcheck' ,'typecheck' ,'unused' ,'varcheck' ,'vet']
+
+" Set markdown folding to be the lowest level insetad of highest
+" let g:vim_markdown_folding_level = 6
+" Disable markdown folding entirely because it gets annoying
+let g:vim_markdown_folding_disabled = 1
+
+" Set the default fold level to fairly deep by default
+set foldlevelstart=5
+
 
 au Filetype go nmap <leader>ga <Plug>(go-alternate-edit)
 au Filetype go nmap <leader>gah <Plug>(go-alternate-split)

@@ -5,9 +5,9 @@
       "rootPatterns": ["go.mod"],
       "trace.server": "verbose",
       "filetypes": ["go"],
-      "disable": {
-        "WorkspaceFolders": false
-      }
+	  "disable": {
+		  "WorkspaceFolders": false
+	  }
     },
     "terraform": {
       "command": "terraform-lsp",
