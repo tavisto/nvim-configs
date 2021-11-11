@@ -1,12 +1,8 @@
 # nvim-configs
 My neovim setup
 
-
-Notes:
-
 # Move in
 ```
-    brew install fzf
     brew install nvm
     nvm install 12
     pip2 install --user neovim
@@ -19,10 +15,14 @@ Notes:
 
 * Open all files in their own windows `vim -O file1 file2`
 
-## ALE
+# Search
 
-* Open the location list `:lop`
-* Next error `]l`
+* [Telescope](https://github.com/nvim-telescope/telescope.nvim)
+
+# Syntax
+
+* [Treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
+
 
 ## Completion
 
