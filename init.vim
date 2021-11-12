@@ -425,7 +425,7 @@ let g:go_auto_sameids = 1
 
 let g:go_fmt_command = "goimports"
 
-" Disable vim-go completion 
+" Disable vim-go completion
 let g:go_code_completion_enabled = 0
 " disable vim-go :GoDef short cut (gd)
 " this is handled by LanguageClient [LC]
@@ -457,7 +457,7 @@ set foldexpr=nvim_treesitter#foldexpr()
 
 
 " luasnip
-imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>' 
+imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>'
 inoremap <silent> <S-Tab> <cmd>lua require'luasnip'.jump(-1)<Cr>
 
 snoremap <silent> <Tab> <cmd>lua require('luasnip').jump(1)<Cr>

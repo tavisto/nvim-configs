@@ -41,8 +41,10 @@ local servers = {
   'gopls',
   'html',
   'jsonls',
+  'puppet',
   'pyright',
   'terraformls',
+  'vimls',
   'yamlls',
 }
 for _, lsp in ipairs(servers) do
