@@ -425,12 +425,19 @@ let g:go_auto_sameids = 1
 
 let g:go_fmt_command = "goimports"
 
+" Disable vim-go completion 
+let g:go_code_completion_enabled = 0
+" disable vim-go :GoDef short cut (gd)
+" this is handled by LanguageClient [LC]
+let g:go_def_mapping_enabled = 0
+
 let g:go_metalinter_enabled = ['deadcode' ,'errcheck' ,'gocyclo' ,'golint' ,'gosimple' ,'govet' ,'ineffassign' ,'maligned' ,'staticcheck' ,'structcheck' ,'typecheck' ,'unused' ,'varcheck' ,'vet']
 
 " Set markdown folding to be the lowest level insetad of highest
 " let g:vim_markdown_folding_level = 6
 " Disable markdown folding entirely because it gets annoying
 let g:vim_markdown_folding_disabled = 1
+
 
 " Set the default fold level to fairly deep by default
 set foldlevelstart=5
@@ -444,10 +451,21 @@ require('treesitter')
 require('nvim-cmp')
 require('nvim-lspconfig')
 require('config-luasnip')
-require'luasnip'.filetype_extend("go", {"go"})
 EOF
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
+
+
+" luasnip
+imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>' 
+inoremap <silent> <S-Tab> <cmd>lua require'luasnip'.jump(-1)<Cr>
+
+snoremap <silent> <Tab> <cmd>lua require('luasnip').jump(1)<Cr>
+snoremap <silent> <S-Tab> <cmd>lua require('luasnip').jump(-1)<Cr>
+
+imap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>'
+smap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>'
+
 
 " Telescope bindings
 " Find files using Telescope command-line sugar.
@@ -455,10 +473,6 @@ nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-
-" Copmletion Settings
-set completeopt=menu,menuone,noselect
-
 
 " Handy base64 deadcode
 :vnoremap <leader>64 c<c-r>=system('base64 --decode', @")<cr><esc>
