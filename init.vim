@@ -20,6 +20,19 @@ else
   call minpac#init()
   call minpac#add('k-takata/minpac', {'type': 'opt'})
 
+  " Lspconfig
+  call minpac#add('neovim/nvim-lspconfig')
+  call minpac#add('hrsh7th/cmp-nvim-lsp')
+  call minpac#add('hrsh7th/cmp-buffer')
+  call minpac#add('hrsh7th/cmp-path')
+  call minpac#add('hrsh7th/cmp-cmdline')
+  call minpac#add('hrsh7th/nvim-cmp')
+
+  " Snippest
+  call minpac#add('L3MON4D3/LuaSnip')
+  call minpac#add('saadparwaiz1/cmp_luasnip')
+  call minpac#add('rafamadriz/friendly-snippets')
+
   " Additional plugins here.
   call minpac#add('junegunn/fzf')
   call minpac#add('junegunn/fzf.vim')
@@ -28,10 +41,20 @@ else
   call minpac#add('vim-scripts/AnsiEsc.vim')
   call minpac#add('vim-scripts/cecutil')
 
+  call minpac#add('takac/vim-hardtime')
+
   " call minpac#add('mtth/scratch.vim')
 
   call minpac#add('scrooloose/nerdtree')
   call minpac#add('Xuyuanp/nerdtree-git-plugin')
+
+
+  " Treesitter
+  call minpac#add('nvim-treesitter/nvim-treesitter')
+
+  " Telescope
+  call minpac#add('nvim-lua/plenary.nvim')
+  call minpac#add('nvim-telescope/telescope.nvim')
 
   " Languages
   call minpac#add('CH-DanReif/haproxy.vim')
@@ -78,9 +101,6 @@ else
   " Mermaid Diagrams
   call minpac#add('zhaozg/vim-diagram')
 
-  " Syntax highligting
-  call minpac#add('w0rp/ale')
-
   " Splunk config files and SPL
   call minpac#add('yorokobi/vim-splunk')
 
@@ -104,12 +124,8 @@ else
   call minpac#add('vim-airline/vim-airline')
   call minpac#add('vim-airline/vim-airline-themes')
 
-  " Call in the Grepper
-  call minpac#add('mhinz/vim-grepper')
-
   " Complete the list
   call minpac#add('honza/vim-snippets')
-  call minpac#add('neoclide/coc.nvim', { 'rev': 'release' })
 
   " Taskwarrior
   call minpac#add('farseer90718/vim-taskwarrior')
@@ -124,26 +140,6 @@ else
   call minpac#add('pedrohdz/vim-yaml-folds')
 
 endif
-
-" Coc stuff:
-" Extensions
-let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-yaml', 'coc-lists', 'coc-snippets', 'coc-go', 'coc-docker', 'coc-syntax', 'coc-dictionary', 'coc-python']
-
-" Use <C-l> for trigger snippet expand.
-imap <C-l> <Plug>(coc-snippets-expand)
-
-" Use <C-j> for select text for visual placeholder of snippet.
-vmap <C-j> <Plug>(coc-snippets-select)
-
-" Use <C-j> for jump to next placeholder, it's default of coc.nvim
-let g:coc_snippet_next = '<c-j>'
-
-" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
-let g:coc_snippet_prev = '<c-k>'
-
-" Use <C-j> for both expand and jump (make expand higher priority.)
-imap <C-j> <Plug>(coc-snippets-expand-jump)
-
 
 " Define user commands for updating/cleaning the plugins.
 " Each of them loads minpac, reloads .vimrc to register the
@@ -186,26 +182,16 @@ xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
-let g:grepper = {}
-let g:grepper.tools = ['rg','git', 'grep']
 
-" Search for the current word
-nnoremap <Leader>* :Grepper -cword -noprompt<CR>
+" Fix from github comment: https://github.com/mhinz/vim-grepper/issues/244#issuecomment-892227766
+" Just sets grepprg to ripgrep and maps some quick aliases to it, no need for a plugin.
+set grepprg=rg\ --vimgrep\ --smart-case
+set grepformat=%f:%l:%c:%m,%f:%l:%m
 
-" Search for the current selection
-nmap gs <plug>(GrepperOperator)
-xmap gs <plug>(GrepperOperator)
+nnoremap <Leader>/ :silent grep<Space>
+nnoremap gs :silent grep <C-r><C-w><CR>:copen<CR>
+xnoremap gs "sy:silent grep <C-r>s<CR>:copen<CR>
 
-" Open Grepper-prompt for a particular Grep-alike tool
-nnoremap <Leader>g :Grepper -tool git<CR>
-nnoremap <Leader>G :Grepper -tool rg<CR>
-
-function! SetupCommandAlias(input, output)
-  exec 'cabbrev <expr> '.a:input
-        \ .' ((getcmdtype() is# ":" && getcmdline() is# "'.a:input.'")'
-        \ .'? ("'.a:output.'") : ("'.a:input.'"))'
-endfunction
-call SetupCommandAlias("grep", "GrepperRg")
 
 if has("persistent_undo")
   set undodir=~/.config/nvim/runtime/undo/
@@ -368,7 +354,7 @@ nmap <silent> <leader><F6> :set relativenumber!<CR>
 nmap <silent> <F7> za
 
 " map <F8>
-nmap <silent> <F8> :FZF
+nmap <silent> <F8> :Telescope live_grep<cr>
 
 " Togle showing non printing chars
 nmap <silent> <F9> :set list!<CR>
@@ -439,75 +425,6 @@ let g:go_auto_sameids = 1
 
 let g:go_fmt_command = "goimports"
 
-
-" COC configs
-
-" if hidden is not set, TextEdit might fail.
-set hidden
-" Better display for messages
-set cmdheight=2
-" Smaller updatetime for CursorHold & CursorHoldI
-set updatetime=300
-" don't give |ins-completion-menu| messages.
-set shortmess+=c
-" always show signcolumns
-set signcolumn=yes:2
-
-" Use tab for trigger completion with characters ahead and navigate.
-" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
-
-" Use `[c` and `]c` to navigate diagnostics
-nmap <silent> [c <Plug>(coc-diagnostic-prev)
-nmap <silent> ]c <Plug>(coc-diagnostic-next)
-
-" Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
-nmap <sient> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-" Use U to show documentation in preview window
-nnoremap <silent> U :call <SID>show_documentation()<CR>
-
-" Remap for rename current word
-nmap <leader>rn <Plug>(coc-rename)
-
-" Remap for format selected region
-vmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-" Show all diagnostics
-nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
-" Manage extensions
-nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
-" Show commands
-nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
-" Find symbol of current document
-nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
-" Search workspace symbols
-nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
-" Do default action for next item.
-nnoremap <silent> <space>j  :<C-u>CocNext<CR>
-" Do default action for previous item.
-nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
-" Resume latest coc list
-nnoremap <silent> <space>p  :<C-u>CocListResume<CR>l
-
-" disable vim-go :GoDef short cut (gd) to let coc do the work
-let g:go_def_mapping_enabled = 0
-
 let g:go_metalinter_enabled = ['deadcode' ,'errcheck' ,'gocyclo' ,'golint' ,'gosimple' ,'govet' ,'ineffassign' ,'maligned' ,'staticcheck' ,'structcheck' ,'typecheck' ,'unused' ,'varcheck' ,'vet']
 
 " Set markdown folding to be the lowest level insetad of highest
@@ -522,3 +439,26 @@ set foldlevelstart=5
 au Filetype go nmap <leader>ga <Plug>(go-alternate-edit)
 au Filetype go nmap <leader>gah <Plug>(go-alternate-split)
 au Filetype go nmap <leader>gav <Plug>(go-alternate-vertical)
+lua <<EOF
+require('treesitter')
+require('nvim-cmp')
+require('nvim-lspconfig')
+require('config-luasnip')
+require'luasnip'.filetype_extend("go", {"go"})
+EOF
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
+
+" Telescope bindings
+" Find files using Telescope command-line sugar.
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+" Copmletion Settings
+set completeopt=menu,menuone,noselect
+
+
+" Handy base64 deadcode
+:vnoremap <leader>64 c<c-r>=system('base64 --decode', @")<cr><esc>
