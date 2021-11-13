@@ -45,6 +45,7 @@ local servers = {
   'pyright',
   'terraformls',
   'vimls',
+  'taplo',
   'yamlls',
 }
 for _, lsp in ipairs(servers) do

@@ -32,16 +32,19 @@ Just hit tab to pull up the list, then enter to accept.
 
 ## Language servers
 
-To install language servers from inside of vim:
+To show which language servers are installed
 ```
-:LspInstalInfo
+:LspInfo
 ```
 
-The popup window will allow you to install whatever language servers you want, then you have to add them to completion in `lua/nvim-lspconfig.lua`
-
-
-The other option is to install the language servers using npm or whatever the package supports.
+### NPM using the package.json
 
 ```
-npm i -g vscode-langservers-extracted
+npm install
+```
+
+### Cargo for rust basesd servers
+
+```
+cargo install taplo-lsp
 ```
