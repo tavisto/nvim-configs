@@ -3,3 +3,4 @@ runtime/*
 pack/minpac/*
 .netrwhist
 spell/*
+node_modules

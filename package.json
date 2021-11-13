@@ -1,0 +1,26 @@
+{
+  "name": "nvim-configs",
+  "version": "1.0.0",
+  "description": "Package file for all my neovim configs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tavisto/nvim-configs.git"
+  },
+  "author": "Tavis Aitken <tavisto@tavisto.net>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tavisto/nvim-configs/issues"
+  },
+  "homepage": "https://github.com/tavisto/nvim-configs#readme",
+  "dependencies": {
+    "bash-language-server": "^2.0.0",
+    "dockerfile-language-server-nodejs": "^0.7.2",
+    "pyright": "^1.1.187",
+    "vim-language-server": "^2.2.5",
+    "vscode-langservers-extracted": "^3.0.1",
+    "yaml-language-server": "^1.2.0"
+  }
+}
