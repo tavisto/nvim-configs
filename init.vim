@@ -118,7 +118,6 @@ else
   call minpac#add('tpope/vim-scriptease', {'type': 'opt'})
   call minpac#add('tpope/vim-surround')
   call minpac#add('tpope/vim-unimpaired')
-  call minpac#add('mbbill/undotree')
 
   " Make the status line pretty
   call minpac#add('vim-airline/vim-airline')
@@ -126,9 +125,6 @@ else
 
   " Complete the list
   call minpac#add('honza/vim-snippets')
-
-  " Taskwarrior
-  call minpac#add('farseer90718/vim-taskwarrior')
 
   " Color Themes
   call minpac#add('cocopon/iceberg.vim')
