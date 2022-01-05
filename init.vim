@@ -1,3 +1,4 @@
+
 " For a paranoia.
 " Normally `:set nocp` is not needed, because it is done automatically
 " when .vimrc is found.
@@ -55,6 +56,9 @@ else
   " Telescope
   call minpac#add('nvim-lua/plenary.nvim')
   call minpac#add('nvim-telescope/telescope.nvim')
+
+  " Linter to fill in the gaps
+  call minpac#add('mfussenegger/nvim-lint')
 
   " Languages
   call minpac#add('CH-DanReif/haproxy.vim')
@@ -447,9 +451,12 @@ require('treesitter')
 require('nvim-cmp')
 require('nvim-lspconfig')
 require('config-luasnip')
+require('nvim-lint')
 EOF
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
+
+au BufWritePost <buffer> lua require('lint').try_lint()
 
 
 " luasnip
