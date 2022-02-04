@@ -28,6 +28,7 @@ else
   call minpac#add('hrsh7th/cmp-path')
   call minpac#add('hrsh7th/cmp-cmdline')
   call minpac#add('hrsh7th/nvim-cmp')
+  call minpac#add('williamboman/nvim-lsp-installer')
 
   " Snippest
   call minpac#add('L3MON4D3/LuaSnip')
@@ -452,6 +453,7 @@ require('nvim-cmp')
 require('nvim-lspconfig')
 require('config-luasnip')
 require('nvim-lint')
+require('lsp-installer')
 EOF
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
