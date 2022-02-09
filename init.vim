@@ -70,6 +70,7 @@ else
   call minpac#add('tbastos/vim-lua')
   call minpac#add('google/vim-jsonnet')
   call minpac#add('tsandall/vim-rego')
+  call minpac#add('gregjurman/vim-nc')
 
   " Go
   call minpac#add('fatih/vim-go')
@@ -151,17 +152,6 @@ command! PackClean  packadd minpac | source $MYVIMRC | call minpac#clean()
 colorscheme gotham256
 " set termguicolors
 
-" Mappings for ALE
-nmap <silent> [W <Plug>(ale_first)
-nmap <silent> [w <Plug>(ale_previous)
-nmap <silent> ]w <Plug>(ale_next)
-nmap <silent> ]W <Plug>(ale_last)
-
-" Check current file
-nmap <silent> <F12> :ALELint<CR>
-
-" Show error window from ALE
-nmap <silent> <leader><F12> <Plug>(ale_detail)
 
 " Put the error list into the local list window
 let g:ale_set_loclist = 1
