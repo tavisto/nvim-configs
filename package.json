@@ -16,7 +16,7 @@
   },
   "homepage": "https://github.com/tavisto/nvim-configs#readme",
   "dependencies": {
-    "bash-language-server": "^2.0.0",
+    "bash-language-server": "^4.9.1",
     "dockerfile-language-server-nodejs": "^0.7.2",
     "pyright": "^1.1.187",
     "vim-language-server": "^2.2.5",

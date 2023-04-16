@@ -140,6 +140,7 @@ else
 
   " Yaml
   call minpac#add('pedrohdz/vim-yaml-folds')
+  call minpac#add('towolf/vim-helm')
 
 endif
 
