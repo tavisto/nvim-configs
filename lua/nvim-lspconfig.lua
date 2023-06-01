@@ -29,31 +29,3 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 
 end
-
--- -- Use a loop to conveniently call 'setup' on multiple servers and
--- -- map buffer local keybindings when the language server attaches
--- local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
--- local servers = {
---   'bashls',
---   'cssls',
---   'dockerls',
---   'eslint',
---   'gopls',
---   'html',
---   'jsonls',
---   'puppet',
---   'pyright',
---   'terraformls',
---   'vimls',
---   'taplo',
---   'yamlls',
--- }
--- for _, lsp in ipairs(servers) do
---   nvim_lsp[lsp].setup {
---     on_attach = on_attach,
---     flags = {
---       debounce_text_changes = 150,
---     },
---     capabilities = capabilities
---   }
--- end

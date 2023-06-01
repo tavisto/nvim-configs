@@ -28,7 +28,9 @@ else
   call minpac#add('hrsh7th/cmp-path')
   call minpac#add('hrsh7th/cmp-cmdline')
   call minpac#add('hrsh7th/nvim-cmp')
-  call minpac#add('williamboman/nvim-lsp-installer')
+  call minpac#add('williamboman/mason.nvim')
+  call minpac#add('williamboman/mason-lspconfig.nvim')
+  call minpac#add('jose-elias-alvarez/null-ls.nvim')
 
   " Snippest
   call minpac#add('L3MON4D3/LuaSnip')
@@ -44,6 +46,7 @@ else
   call minpac#add('vim-scripts/cecutil')
 
   call minpac#add('takac/vim-hardtime')
+  call minpac#add('mbbill/undotree')
 
   " call minpac#add('mtth/scratch.vim')
 
@@ -53,6 +56,7 @@ else
 
   " Treesitter
   call minpac#add('nvim-treesitter/nvim-treesitter')
+  call minpac#add('rcarriga/nvim-notify')
 
   " Telescope
   call minpac#add('nvim-lua/plenary.nvim')
@@ -71,6 +75,7 @@ else
   call minpac#add('google/vim-jsonnet')
   call minpac#add('tsandall/vim-rego')
   call minpac#add('gregjurman/vim-nc')
+  call minpac#add('isobit/vim-caddyfile')
 
   " Go
   call minpac#add('fatih/vim-go')
@@ -151,7 +156,7 @@ command! PackUpdate packadd minpac | source $MYVIMRC | call minpac#update()
 command! PackClean  packadd minpac | source $MYVIMRC | call minpac#clean()
 
 colorscheme gotham256
-" set termguicolors
+set termguicolors
 
 
 " Put the error list into the local list window
@@ -388,6 +393,7 @@ nmap <leader>= :call Preserve("normal gg=G")<CR>
 nnoremap <leader>fd "=strftime("%Y-%m-%dT%T%z")<CR>p
 
 au BufRead,BufNewFile *.pp   setfiletype puppet
+au BufRead,BufNewFile *Corefile   setfiletype caddyfile
 
 if has('nvim')
   " Terminal Mode Settigs
@@ -444,7 +450,8 @@ require('nvim-cmp')
 require('nvim-lspconfig')
 require('config-luasnip')
 require('nvim-lint')
-require('lsp-installer')
+require('nvim-notify')
+require("config-mason")
 EOF
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
@@ -467,8 +474,13 @@ smap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' 
 " Find files using Telescope command-line sugar.
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fG <cmd>Telescope grep_string<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 " Handy base64 deadcode
 :vnoremap <leader>64 c<c-r>=system('base64 --decode', @")<cr><esc>
+
+" Terraform defaults
+let g:terraform_fmt_on_save=1 " Format all terraform on save
+let g:terraform_fold_sections=1 " Fold all terraform sections by default
