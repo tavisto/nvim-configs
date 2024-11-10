@@ -142,6 +142,7 @@ else
   call minpac#add('lifepillar/vim-solarized8')
   call minpac#add('whatyouhide/vim-gotham')
   call minpac#add('nanotech/jellybeans.vim')
+  call minpac#add('morhetz/gruvbox')
 
   " Yaml
   call minpac#add('pedrohdz/vim-yaml-folds')
