@@ -143,10 +143,14 @@ else
   call minpac#add('whatyouhide/vim-gotham')
   call minpac#add('nanotech/jellybeans.vim')
   call minpac#add('morhetz/gruvbox')
+  call minpac#add('projekt0n/github-nvim-theme')
 
   " Yaml
   call minpac#add('pedrohdz/vim-yaml-folds')
   call minpac#add('towolf/vim-helm')
+
+  " Github
+  call minpac#add('github/copilot.vim')
 
 endif
 
@@ -156,7 +160,7 @@ endif
 command! PackUpdate packadd minpac | source $MYVIMRC | call minpac#update()
 command! PackClean  packadd minpac | source $MYVIMRC | call minpac#clean()
 
-colorscheme gotham256
+colorscheme github_dark_high_contrast
 set termguicolors
 
 
@@ -485,3 +489,7 @@ nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 " Terraform defaults
 let g:terraform_fmt_on_save=1 " Format all terraform on save
 let g:terraform_fold_sections=1 " Fold all terraform sections by default
+
+" Github copilot settings
+imap <expr><script><expr> <C-j> copilot#Accept("\\<CR>")
+let g:copilot_no_tab_map = v:true
