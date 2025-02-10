@@ -152,6 +152,9 @@ else
   " Github
   call minpac#add('github/copilot.vim')
 
+  " AI Tools
+  call minpac#add('olimorris/codecompanion.nvim')
+
 endif
 
 " Define user commands for updating/cleaning the plugins.
@@ -449,6 +452,7 @@ set foldlevelstart=5
 au Filetype go nmap <leader>ga <Plug>(go-alternate-edit)
 au Filetype go nmap <leader>gah <Plug>(go-alternate-split)
 au Filetype go nmap <leader>gav <Plug>(go-alternate-vertical)
+
 lua <<EOF
 require('treesitter')
 require('nvim-cmp')
@@ -456,7 +460,8 @@ require('nvim-lspconfig')
 require('config-luasnip')
 require('nvim-lint')
 require('nvim-notify')
-require("config-mason")
+require('config-mason')
+require('nvim-codecompanion')
 EOF
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
@@ -482,6 +487,7 @@ nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fG <cmd>Telescope grep_string<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+nnoremap <leader>fc <cmd>Telescope codecompanion<cr>
 
 " Handy base64 deadcode
 :vnoremap <leader>64 c<c-r>=system('base64 --decode', @")<cr><esc>
