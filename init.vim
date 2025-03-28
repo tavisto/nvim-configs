@@ -1,4 +1,3 @@
-
 " For a paranoia.
 " Normally `:set nocp` is not needed, because it is done automatically
 " when .vimrc is found.
@@ -52,7 +51,7 @@ else
 
   call minpac#add('scrooloose/nerdtree')
   call minpac#add('Xuyuanp/nerdtree-git-plugin')
-
+  call minpac#add('ryanoasis/vim-devicons')
 
   " Treesitter
   call minpac#add('nvim-treesitter/nvim-treesitter')
@@ -76,6 +75,8 @@ else
   call minpac#add('tsandall/vim-rego')
   call minpac#add('gregjurman/vim-nc')
   call minpac#add('isobit/vim-caddyfile')
+  call minpac#add('NoahTheDuke/vim-just')
+  call minpac#add('IndianBoy42/tree-sitter-just')
 
   " Go
   call minpac#add('fatih/vim-go')
@@ -364,8 +365,7 @@ nmap <silent> <F8> :Telescope live_grep<cr>
 " Togle showing non printing chars
 nmap <silent> <F9> :set list!<CR>
 
-" Togle paste mode on and off with F10
-set pastetoggle=<F10>
+" F10 is free now
 
 " Add current buffer to diff
 nmap <silent> <F11> :diffthis<CR>
@@ -462,6 +462,7 @@ require('nvim-lint')
 require('nvim-notify')
 require('config-mason')
 require('nvim-codecompanion')
+require('nvim-telescope')
 EOF
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
@@ -498,4 +499,16 @@ let g:terraform_fold_sections=1 " Fold all terraform sections by default
 
 " Github copilot settings
 imap <expr><script><expr> <C-j> copilot#Accept("\\<CR>")
+imap <C-l> <Plug>(copilot-accept-word)
 let g:copilot_no_tab_map = v:true
+
+
+" Set the python interpreter to use the one from asdf
+let g:python3_host_prog = expand('~/.asdf/shims/python')
+
+" Set up webdevicons
+let g:webdevicons_enable = 1
+let g:webdevicons_enable_nerdtree = 1
+let g:webdevicons_enable_airline_tabline = 1
+let g:webdevicons_enable_airline_statusline = 1
+let g:WebDevIconsOS = 'Darwin'
