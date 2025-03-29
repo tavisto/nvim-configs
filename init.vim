@@ -156,6 +156,9 @@ else
   " AI Tools
   call minpac#add('olimorris/codecompanion.nvim')
 
+  " Outline view
+  call minpac#add('stevearc/aerial.nvim')
+
 endif
 
 " Define user commands for updating/cleaning the plugins.
@@ -463,7 +466,8 @@ require('nvim-notify')
 require('config-mason')
 require('nvim-codecompanion')
 require('nvim-telescope')
-EOF
+require('nvim-aerial')
+
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
 
@@ -500,6 +504,7 @@ let g:terraform_fold_sections=1 " Fold all terraform sections by default
 " Github copilot settings
 imap <expr><script><expr> <C-j> copilot#Accept("\\<CR>")
 imap <C-l> <Plug>(copilot-accept-word)
+imap <C-K> <Plug>(copilot-next-suggestion)
 let g:copilot_no_tab_map = v:true
 
 
