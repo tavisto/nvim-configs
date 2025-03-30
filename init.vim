@@ -467,6 +467,7 @@ require('config-mason')
 require('nvim-codecompanion')
 require('nvim-telescope')
 require('nvim-aerial')
+EOF
 
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
