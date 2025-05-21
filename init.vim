@@ -82,8 +82,6 @@ else
   call minpac#add('fatih/vim-go')
   call minpac#add('sebdah/vim-delve')
 
-  call minpac#add('hashivim/vim-hashicorp-tools')
-  call minpac#add('hashivim/vim-terraform')
   call minpac#add('martinda/Jenkinsfile-vim-syntax')
   call minpac#add('mustache/vim-mustache-handlebars')
   call minpac#add('nathanielc/vim-tickscript')
@@ -494,13 +492,10 @@ nnoremap <leader>fG <cmd>Telescope grep_string<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <leader>fc <cmd>Telescope codecompanion<cr>
+nnoremap <leader>fe <cmd>Telescope diagnostics<cr>
 
 " Handy base64 deadcode
 :vnoremap <leader>64 c<c-r>=system('base64 --decode', @")<cr><esc>
-
-" Terraform defaults
-let g:terraform_fmt_on_save=1 " Format all terraform on save
-let g:terraform_fold_sections=1 " Fold all terraform sections by default
 
 " Github copilot settings
 imap <expr><script><expr> <C-j> copilot#Accept("\\<CR>")

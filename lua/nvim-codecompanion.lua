@@ -76,7 +76,7 @@ require("codecompanion").setup({
         },
         schema = {
           model = {
-            default = "codellama",
+            default = "codellama:latest",
           },
         },
         headers = {
