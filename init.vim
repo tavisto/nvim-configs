@@ -498,7 +498,12 @@ nnoremap <leader>fG <cmd>Telescope grep_string<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <leader>fc <cmd>Telescope codecompanion<cr>
-nnoremap <leader>fe <cmd>Telescope diagnostics<cr>
+
+" Trouble keybindings
+" See `:help trouble.nvim` for more detail
+nnoremap <Leader>xx <cmd>Trouble diagnostics toggle<cr>
+nnoremap <Leader>xl <cmd>Trouble loclist toggle<cr>
+nnoremap <Leader>xq <cmd>Trouble quickfix toggle<cr>
 
 " Handy base64 deadcode
 :vnoremap <leader>64 c<c-r>=system('base64 --decode', @")<cr><esc>
