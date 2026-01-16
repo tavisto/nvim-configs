@@ -29,3 +29,7 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 
 end
+
+return {
+  on_attach = on_attach,
+}

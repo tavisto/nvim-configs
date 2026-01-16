@@ -30,6 +30,7 @@ else
   call minpac#add('williamboman/mason.nvim')
   call minpac#add('williamboman/mason-lspconfig.nvim')
   call minpac#add('jose-elias-alvarez/null-ls.nvim')
+  call minpac#add('folke/trouble.nvim')
 
   " Snippest
   call minpac#add('L3MON4D3/LuaSnip')
@@ -469,6 +470,7 @@ require('config-mason')
 require('nvim-codecompanion')
 require('nvim-telescope')
 require('nvim-aerial')
+require('nvim-trouble')
 EOF
 
 set foldmethod=expr
