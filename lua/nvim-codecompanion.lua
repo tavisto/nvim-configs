@@ -88,5 +88,15 @@ require("codecompanion").setup({
       })
     end,
   },
+  promt_library = {
+    default = {
+      prompt = "You are a helpful assistant. Answer the question as truthfully as possible, and if you don't know the answer, say 'I don't know'.",
+      temperature = 0.5,
+      max_tokens = 1000,
+      top_p = 1,
+      frequency_penalty = 0,
+      presence_penalty = 0,
+    },
+  },
 })
 vim.env["CODECOMPANION_TOKEN_PATH"] = vim.fn.expand("~/.config")

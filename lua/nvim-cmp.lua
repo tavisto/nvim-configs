@@ -80,6 +80,10 @@ require('lspconfig')['gopls'].setup {
 }
 
 
-
+cmp.setup({
+    sources = cmp.config.sources({
+        { name = 'render-markdown' },
+    }),
+})
 
 

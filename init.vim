@@ -67,7 +67,7 @@ else
   " Languages
   call minpac#add('CH-DanReif/haproxy.vim')
   call minpac#add('chr4/nginx.vim')
-  call minpac#add('ekalinin/Dockerfile.vim')
+  " call minpac#add('ekalinin/Dockerfile.vim')
   call minpac#add('vim-scripts/groovy.vim')
   call minpac#add('wgwoods/vim-systemd-syntax')
   call minpac#add('tbastos/vim-lua')
@@ -88,6 +88,8 @@ else
   call minpac#add('othree/html5.vim')
   call minpac#add('pearofducks/ansible-vim')
   call minpac#add('plasticboy/vim-markdown')
+  call minpac#add('nvim-tree/nvim-web-devicons')
+  call minpac#add('MeanderingProgrammer/render-markdown.nvim')
 
   " Ruby
   call minpac#add('sheerun/rspec.vim')
@@ -150,6 +152,7 @@ else
 
   " Github
   call minpac#add('github/copilot.vim')
+  call minpac#add('topaxi/pipeline.nvim')
 
   " AI Tools
   call minpac#add('olimorris/codecompanion.nvim')
@@ -366,7 +369,8 @@ nmap <silent> <F8> :Telescope live_grep<cr>
 " Togle showing non printing chars
 nmap <silent> <F9> :set list!<CR>
 
-" F10 is free now
+" Toggle rendering markdown files
+nmap <silent> <F10> :RenderMarkdown toggle<CR>
 
 " Add current buffer to diff
 nmap <silent> <F11> :diffthis<CR>
