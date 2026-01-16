@@ -8,9 +8,6 @@ local servers = {
   "rust_analyzer",
   "terraformls",
   "jedi_language_server",
-  "ruby_lsp",
-  "puppet",
-  "bashls",
 }
 
 require("mason-lspconfig").setup {
