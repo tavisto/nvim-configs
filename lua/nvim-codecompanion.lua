@@ -12,7 +12,7 @@ require("codecompanion").setup({
       window = {
         layout = "vertical", -- float|vertical|horizontal|buffer
         position = "left", -- left|right|top|bottom (nil will default depending on vim.opt.plitright|vim.opt.splitbelow)
-        border = "single",
+        border = "solid",
         height = 0.8,
         width = 0.45,
         relative = "editor",
@@ -46,6 +46,7 @@ require("codecompanion").setup({
   strategies = {
     chat = {
       adapter = "copilot",
+      -- adapter = "gemini",
       -- adapter = "openai",
       -- adapter = "ollama",
     },
@@ -57,38 +58,52 @@ require("codecompanion").setup({
     },
   },
   adapters = {
-    openai = function()
-      return require("codecompanion.adapters").extend("openai", {
-        env = {
-          api_key = "cmd:op read op://Private/OpenApiToken/credential --no-newline",
-        },
-        schema = {
-          model = {
-            default = "gpt-4o-mini",
+    http = {
+      openai = function()
+        return require("codecompanion.adapters").extend("openai", {
+          env = {
+            api_key = "cmd:op read op://Private/OpenApiToken/credential --no-newline",
           },
-        },
-      })
-    end,
-    ollama = function()
-      return require("codecompanion.adapters").extend("ollama", {
-        env = {
-          url = "http://localhost:11434",
-        },
-        schema = {
-          model = {
-            default = "codellama:latest",
+          schema = {
+            model = {
+              default = "gpt-4o-mini",
+            },
           },
-        },
-        headers = {
-          ["Content-Type"] = "application/json",
-        },
-        parameters = {
-          sync = true,
-        },
-      })
-    end,
+        })
+      end,
+      ollama = function()
+        return require("codecompanion.adapters").extend("ollama", {
+          env = {
+            url = "http://localhost:11434",
+          },
+          schema = {
+            model = {
+              default = "codellama:latest",
+            },
+          },
+          headers = {
+            ["Content-Type"] = "application/json",
+          },
+          parameters = {
+            sync = true,
+          },
+        })
+      end,
+      gemini = function()
+        return require("codecompanion.adapters").extend("gemini", {
+          env = {
+            api_key = "cmd:op read op://Employee/GeminiToken/credential --no-newline",
+          },
+          schema = {
+            model = {
+              default = "gemini-1.5-flash",
+            },
+          },
+        })
+      end,
+    },
   },
-  promt_library = {
+  prompt_library = {
     default = {
       prompt = "You are a helpful assistant. Answer the question as truthfully as possible, and if you don't know the answer, say 'I don't know'.",
       temperature = 0.5,
