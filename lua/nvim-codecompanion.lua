@@ -45,13 +45,13 @@ require("codecompanion").setup({
   },
   strategies = {
     chat = {
-      adapter = "copilot",
+      -- adapter = "copilot",
       -- adapter = "gemini",
       -- adapter = "openai",
-      -- adapter = "ollama",
+      adapter = "ollama",
     },
     inline = {
-      adapter = "copilot",
+      adapter = "ollama",
     },
     aggent = {
       adapter = "copilot",
@@ -78,7 +78,7 @@ require("codecompanion").setup({
           },
           schema = {
             model = {
-              default = "codellama:latest",
+              default = "gemma3:latest",
             },
           },
           headers = {

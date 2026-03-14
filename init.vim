@@ -53,6 +53,7 @@ else
   call minpac#add('scrooloose/nerdtree')
   call minpac#add('Xuyuanp/nerdtree-git-plugin')
   call minpac#add('ryanoasis/vim-devicons')
+  call minpac#add('sindrets/diffview.nvim')
 
   " Treesitter
   call minpac#add('nvim-treesitter/nvim-treesitter')
@@ -504,6 +505,12 @@ nnoremap <leader>fc <cmd>Telescope codecompanion<cr>
 nnoremap <Leader>xx <cmd>Trouble diagnostics toggle<cr>
 nnoremap <Leader>xl <cmd>Trouble loclist toggle<cr>
 nnoremap <Leader>xq <cmd>Trouble quickfix toggle<cr>
+
+" DiffView keybindings
+" See `:help diffview.nvim` for more detail
+nnoremap <Leader>dv <cmd>DiffviewOpen<cr>
+nnoremap <Leader>dc <cmd>DiffviewClose<cr>
+nnoremap <Leader>df <cmd>DiffviewFileHistory %<cr>
 
 " Handy base64 deadcode
 :vnoremap <leader>64 c<c-r>=system('base64 --decode', @")<cr><esc>
