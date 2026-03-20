@@ -60,15 +60,8 @@ To set up this Neovim configuration:
 
 ---
 
-### **Language Server Management**
-- **[mason.nvim](https://github.com/williamboman/mason.nvim)**: Manages LSP servers, linters, and formatters.
-- **[mason-lspconfig.nvim](https://github.com/williamboman/mason-lspconfig.nvim)**: Bridges Mason with nvim-lspconfig.
-
----
-
 ### **Linting and Formatting**
 - **[nvim-lint](https://github.com/mfussenegger/nvim-lint)**: Provides linting support for various languages.
-- **[null-ls.nvim](https://github.com/jose-elias-alvarez/null-ls.nvim)**: Integrates external formatters and linters with Neovim.
 
 ---
 
@@ -91,7 +84,6 @@ To set up this Neovim configuration:
 - **Go**: [vim-go](https://github.com/fatih/vim-go), [vim-delve](https://github.com/sebdah/vim-delve)
 - **Python**: [vim-python-pep8-indent](https://github.com/Vimjas/vim-python-pep8-indent), [python-syntax](https://github.com/vim-python/python-syntax)
 - **Ruby**: [vim-ruby](https://github.com/vim-ruby/vim-ruby), [rspec.vim](https://github.com/sheerun/rspec.vim)
-- **Terraform**: [vim-terraform](https://github.com/hashivim/vim-terraform)
 - **Docker**: [Dockerfile.vim](https://github.com/ekalinin/Dockerfile.vim)
 - **Markdown**: [vim-markdown](https://github.com/plasticboy/vim-markdown)
 - **YAML**: [vim-yaml-folds](https://github.com/pedrohdz/vim-yaml-folds)
@@ -104,40 +96,32 @@ To set up this Neovim configuration:
 
 ## Language Servers
 
+LSP servers are managed by your system package manager — no Neovim plugin required. The configured servers and how to install them:
+
+| Server | Language | Install command |
+|--------|----------|----------------|
+| `lua_ls` | Lua | `brew install lua-language-server` |
+| `rust_analyzer` | Rust | `rustup component add rust-analyzer` |
+| `jedi_language_server` | Python | `pip install jedi-language-server` |
+| `yamlls` | YAML | `brew install yaml-language-server` |
+| `bashls` | Bash | `brew install bash-language-server` |
+| `helm_ls` | Helm | `brew install helm-ls` |
+| `jsonls` | JSON | `brew install vscode-langservers-extracted` |
+| `html` | HTML | `brew install vscode-langservers-extracted` |
+| `cssls` | CSS | `brew install vscode-langservers-extracted` |
+| `eslint` | JavaScript/TypeScript | `brew install vscode-langservers-extracted` |
+| `marksman` | Markdown | `brew install marksman` |
+
+Linters used by `nvim-lint` also need to be installed:
+
+| Linter | Install command |
+|--------|----------------|
+| `shellcheck` | `brew install shellcheck` |
+
 ### Check Installed Language Servers
-Run the following command in Neovim to see the status of installed language servers:
+Run the following command in Neovim to see the status of active language servers:
 ```
 :LspInfo
-```
-
-### Install Language Servers Using Mason
-The [Mason](https://github.com/williamboman/mason.nvim) plugin simplifies the installation and management of language servers, linters, and formatters.
-
-1. Open Mason's UI in Neovim:
-    ```
-    :Mason
-    ```
-
-2. Use the Mason UI to browse and install the desired language servers, linters, or formatters. For example:
-    - `lua-language-server`
-    - `pyright` (Python)
-    - `rust-analyzer` (Rust)
-
-3. Once installed, Mason automatically integrates with `nvim-lspconfig` to configure the language servers.
-
-### Manual Installation (Optional)
-If you prefer manual installation, you can still use the following methods:
-
-#### Using NPM
-Install language servers defined in `package.json`:
-```
-npm install
-```
-
-#### Using Cargo (for Rust-based servers)
-Example:
-```
-cargo install taplo-lsp
 ```
 
 ---

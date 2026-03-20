@@ -27,9 +27,7 @@ else
   call minpac#add('hrsh7th/cmp-path')
   call minpac#add('hrsh7th/cmp-cmdline')
   call minpac#add('hrsh7th/nvim-cmp')
-  call minpac#add('williamboman/mason.nvim')
-  call minpac#add('williamboman/mason-lspconfig.nvim')
-  call minpac#add('jose-elias-alvarez/null-ls.nvim')
+
   call minpac#add('folke/trouble.nvim')
 
   " Snippest
@@ -467,7 +465,7 @@ require('nvim-lspconfig')
 require('config-luasnip')
 require('nvim-lint')
 require('nvim-notify')
-require('config-mason')
+
 require('nvim-codecompanion')
 require('nvim-telescope')
 require('nvim-aerial')
