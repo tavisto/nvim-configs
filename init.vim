@@ -67,7 +67,6 @@ else
   " Languages
   call minpac#add('CH-DanReif/haproxy.vim')
   call minpac#add('chr4/nginx.vim')
-  " call minpac#add('ekalinin/Dockerfile.vim')
   call minpac#add('vim-scripts/groovy.vim')
   call minpac#add('wgwoods/vim-systemd-syntax')
   call minpac#add('tbastos/vim-lua')
@@ -171,7 +170,6 @@ command! PackClean  packadd minpac | source $MYVIMRC | call minpac#clean()
 colorscheme github_dark_high_contrast
 set termguicolors
 
-
 " Put the error list into the local list window
 let g:ale_set_loclist = 1
 let g:ale_set_quickfix = 0
@@ -183,7 +181,6 @@ let g:ale_sign_warning = '⚠'
 
 " Enable integration with airline.
 let g:airline#extensions#ale#enabled = 1
-
 
 " Easy Align mappings
 " Start interactive EasyAlign in visual mode (e.g. vipga)
@@ -342,14 +339,14 @@ map <C-L> <C-W>l
 
 " F1 reserved for help
 
-" Toggle NERDTree
+" <F2> Toggle NERDTree
 nmap <silent> <F2> :NERDTreeToggle<CR>
 nmap <silent> <leader><F2> :NERDTreeFind<CR>
 
-" Toggle search highlight
+" <F3> Toggle search highlight
 nmap <silent> <F3> :set hls!<CR>
 
-" Rerun last : command
+" <F4> Toggle Undotree
 nmap <silent> <F4> :UndotreeToggle<CR>
 
 " Use <F5> to togle comments
