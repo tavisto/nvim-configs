@@ -46,18 +46,18 @@ require("codecompanion").setup({
   strategies = {
     chat = {
       -- adapter = "copilot",
-      -- adapter = "gemini",
+      adapter = "gemini",
       -- adapter = "openai",
-      adapter = "ollama",
+      -- adapter = "opencode",
     },
     inline = {
-      adapter = "ollama",
-    },
-    aggent = {
-      adapter = "copilot",
+      adapter = "gemini",
     },
   },
   adapters = {
+    acp = {
+      opencode = "opencode",
+    },
     http = {
       openai = function()
         return require("codecompanion.adapters").extend("openai", {
@@ -92,11 +92,11 @@ require("codecompanion").setup({
       gemini = function()
         return require("codecompanion.adapters").extend("gemini", {
           env = {
-            api_key = "cmd:op read op://Employee/GeminiToken/credential --no-newline",
+            api_key = "cmd:op read op://Private/Gemini/key --no-newline",
           },
           schema = {
             model = {
-              default = "gemini-1.5-flash",
+              default = "gemini-2.5-flash-lite",
             },
           },
         })

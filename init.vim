@@ -446,6 +446,9 @@ let g:go_metalinter_enabled = ['deadcode' ,'errcheck' ,'gocyclo' ,'golint' ,'gos
 " Disable markdown folding entirely because it gets annoying
 let g:vim_markdown_folding_disabled = 1
 
+" Always set wrapping on markdown files
+au FileType markdown set wrap
+
 
 " Set the default fold level to fairly deep by default
 set foldlevelstart=5
