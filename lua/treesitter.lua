@@ -1,17 +1,14 @@
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = "all", -- one of "all", or a list of languages
-  sync_install = false, -- install languages synchronously (only applied to `ensure_installed`)
-  ignore_install = {"ipkg", "javascript" }, -- List of parsers to ignore installing
-  highlight = {
-    enable = true,              -- false will disable the whole extension
-    disable = { },  -- list of language that will be disabled
-    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-    -- Using this option may slow down your editor, and you may see some duplicate highlights.
-    -- Instead of true it can also be a list of languages
-    additional_vim_regex_highlighting = false,
-  },
-  indent = {
-    enable = true
-  }
-}
+-- nvim-treesitter main branch (Neovim 0.12+)
+-- The old nvim-treesitter.configs API is gone. Highlighting is handled by
+-- Neovim's built-in vim.treesitter; this plugin is now a parser/query manager.
+require('nvim-treesitter').setup()
+
+-- Enable treesitter highlighting and indent for every filetype that has a parser.
+vim.api.nvim_create_autocmd('FileType', {
+  callback = function(args)
+    pcall(vim.treesitter.start, args.buf)
+    if pcall(require, 'nvim-treesitter') then
+      vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+    end
+  end,
+})

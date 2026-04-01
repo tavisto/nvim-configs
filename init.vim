@@ -473,7 +473,7 @@ require('nvim-trouble')
 EOF
 
 set foldmethod=expr
-set foldexpr=nvim_treesitter#foldexpr()
+set foldexpr=v:lua.vim.treesitter.foldexpr()
 
 au BufWritePost <buffer> lua require('lint').try_lint()
 
