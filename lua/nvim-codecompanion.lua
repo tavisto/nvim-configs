@@ -46,9 +46,11 @@ require("codecompanion").setup({
   strategies = {
     chat = {
       -- adapter = "copilot",
-      adapter = "gemini",
+      -- adapter = "gemini",
       -- adapter = "openai",
+      -- adapter = "apfel",
       -- adapter = "opencode",
+      adapter = "ollama",
     },
     inline = {
       adapter = "gemini",
@@ -78,7 +80,7 @@ require("codecompanion").setup({
           },
           schema = {
             model = {
-              default = "gemma3:latest",
+              default = "gemma4",
             },
           },
           headers = {
