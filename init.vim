@@ -150,7 +150,7 @@ else
   call minpac#add('towolf/vim-helm')
 
   " Github
-  call minpac#add('github/copilot.vim')
+  call minpac#add('milanglacier/minuet-ai.nvim')
   call minpac#add('topaxi/pipeline.nvim')
 
   " AI Tools
@@ -467,6 +467,7 @@ require('nvim-lint')
 require('nvim-notify')
 
 require('nvim-codecompanion')
+require('minuet-config')
 require('nvim-telescope')
 require('nvim-aerial')
 require('nvim-trouble')
@@ -513,11 +514,7 @@ nnoremap <Leader>df <cmd>DiffviewFileHistory %<cr>
 " Handy base64 deadcode
 :vnoremap <leader>64 c<c-r>=system('base64 --decode', @")<cr><esc>
 
-" Github copilot settings
-imap <expr><script><expr> <C-j> copilot#Accept("\\<CR>")
-imap <C-l> <Plug>(copilot-accept-word)
-imap <C-K> <Plug>(copilot-next-suggestion)
-let g:copilot_no_tab_map = v:true
+" Minuet keymaps are registered automatically via virtualtext.keymap in lua/minuet-config.lua
 
 
 " Set the python interpreter to use the one from asdf

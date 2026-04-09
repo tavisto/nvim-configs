@@ -91,8 +91,81 @@ To set up this Neovim configuration:
 ---
 
 ### **AI and Productivity**
-- **[github/copilot.vim](https://github.com/github/copilot.vim)**: Provides AI-assisted code suggestions.
-- **[codecompanion.nvim](https://github.com/olimorris/codecompanion.nvim)**: Adds AI-powered coding assistance.
+- **[minuet-ai.nvim](https://github.com/milanglacier/minuet-ai.nvim)**: Provides Copilot-style ghost-text inline completions backed by local [Ollama](https://ollama.com) using FIM (fill-in-the-middle) completions (model: `qwen2.5-coder:1.5b`). Keymaps: `<C-j>` accept, `<C-l>` accept line, `<C-K>` next, `<C-e>` dismiss.
+- **[codecompanion.nvim](https://github.com/olimorris/codecompanion.nvim)**: AI-powered chat and inline editing assistant. Chat uses Ollama (`gemma4`); other adapters (Gemini, OpenAI) available.
+
+## Key Mappings
+
+### AI Completions (minuet-ai — insert mode)
+
+| Key | Action |
+|-----|--------|
+| `<C-j>` | Accept full suggestion |
+| `<C-l>` | Accept one line |
+| `<C-K>` | Next suggestion |
+| `<C-H>` | Previous suggestion |
+| `<C-e>` | Dismiss suggestion |
+| `<leader>mt` | Toggle completions on/off |
+
+### AI Chat (CodeCompanion)
+
+| Key | Action |
+|-----|--------|
+| `<leader>fc` | Browse prompt library (Telescope) |
+
+### LSP (active when a language server is attached)
+
+| Key | Action |
+|-----|--------|
+| `gd` | Go to definition |
+| `gD` | Go to declaration |
+| `gi` | Go to implementation |
+| `gr` | List references |
+| `K` | Hover docs |
+| `<C-k>` | Signature help |
+| `<leader>rn` | Rename symbol |
+| `<leader>ca` | Code action |
+| `<leader>D` | Type definition |
+| `<leader>f` | Format buffer |
+| `<leader>e` | Show diagnostics float |
+| `[d` / `]d` | Previous / next diagnostic |
+| `<leader>q` | Send diagnostics to loclist |
+
+### Telescope
+
+| Key | Action |
+|-----|--------|
+| `<leader>ff` | Find files |
+| `<leader>fg` | Live grep |
+| `<leader>fG` | Grep word under cursor |
+| `<leader>fb` | Buffers |
+| `<leader>fh` | Help tags |
+
+### Trouble (diagnostics)
+
+| Key | Action |
+|-----|--------|
+| `<leader>xx` | Toggle diagnostics |
+| `<leader>xl` | Toggle loclist |
+| `<leader>xq` | Toggle quickfix |
+
+### DiffView
+
+| Key | Action |
+|-----|--------|
+| `<leader>dv` | Open diff view |
+| `<leader>dc` | Close diff view |
+| `<leader>df` | File history |
+
+### Snippets (LuaSnip — insert/select mode)
+
+| Key | Action |
+|-----|--------|
+| `<Tab>` | Expand snippet or jump forward |
+| `<S-Tab>` | Jump backward |
+| `<C-E>` | Cycle snippet choices |
+
+---
 
 ## Language Servers
 
