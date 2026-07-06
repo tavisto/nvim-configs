@@ -20,12 +20,13 @@ cmp.setup({
   mapping = {
     ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
     ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-    ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
     ['<C-e>'] = cmp.mapping({
       i = cmp.mapping.abort(),
       c = cmp.mapping.close(),
     }),
     ['<CR>'] = cmp.mapping.confirm({ select = true }),
+    -- Manually invoke a minuet (LLM) completion menu on demand.
+    ['<C-y>'] = require('minuet').make_cmp_map(),
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
@@ -53,7 +54,12 @@ cmp.setup({
     { name = 'luasnip' },
   }, {
       { name = 'buffer' },
-    })
+    }),
+  performance = {
+    -- minuet's LLM source is slower than LSP/buffer; give the manual <A-y>
+    -- invocation room to return before cmp times out (default is 500ms).
+    fetching_timeout = 3000,
+  },
 })
 
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).

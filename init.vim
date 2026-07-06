@@ -514,9 +514,6 @@ nnoremap <Leader>df <cmd>DiffviewFileHistory %<cr>
 " Handy base64 deadcode
 :vnoremap <leader>64 c<c-r>=system('base64 --decode', @")<cr><esc>
 
-" Minuet keymaps are registered automatically via virtualtext.keymap in lua/minuet-config.lua
-
-
 " Set the python interpreter to use the one from asdf
 let g:python3_host_prog = expand('~/.asdf/shims/python')
 

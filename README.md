@@ -92,7 +92,48 @@ To set up this Neovim configuration:
 
 ### **AI and Productivity**
 - **[minuet-ai.nvim](https://github.com/milanglacier/minuet-ai.nvim)**: Provides Copilot-style ghost-text inline completions backed by local [Ollama](https://ollama.com) using FIM (fill-in-the-middle) completions (model: `qwen2.5-coder:1.5b`). Keymaps: `<C-j>` accept, `<C-l>` accept line, `<C-K>` next, `<C-e>` dismiss.
-- **[codecompanion.nvim](https://github.com/olimorris/codecompanion.nvim)**: AI-powered chat and inline editing assistant. Chat uses Ollama (`gemma4`); other adapters (Gemini, OpenAI) available.
+- **[codecompanion.nvim](https://github.com/olimorris/codecompanion.nvim)**: AI-powered chat and inline editing assistant. Chat uses Ollama (`qwen3.6:35b-a3b-nvfp4`); other adapters (Gemini, OpenAI) available.
+
+## Ollama Service Setup
+
+Both AI plugins talk to a local Ollama server, installed and run as a
+Homebrew service (`brew services` / launchd). Out of the box that service
+works poorly for this setup:
+
+- Ollama unloads a model **5 minutes** after its last request, so the
+  completion model cold-starts constantly.
+- The completion model (`qwen2.5-coder:1.5b`, minuet) and the chat model
+  (`qwen3.6:35b-a3b-nvfp4`, codecompanion) need to be resident at the same
+  time, or loading one can evict the other.
+
+Run the setup script to fix this:
+
+```
+scripts/ollama-service.sh
+```
+
+It edits the service plist (launchd services don't read your shell profile,
+so the env vars must live there), restarts the service, warms both models,
+and finishes with `ollama ps` so you can confirm both models show an `UNTIL`
+of ~4 hours. Pass model names as arguments to warm different models instead.
+
+The environment variables it sets:
+
+| Variable | Value | Why |
+|----------|-------|-----|
+| `OLLAMA_KEEP_ALIVE` | `4h` | Keep models loaded for 4 hours after last use instead of the 5 minute default. |
+| `OLLAMA_MAX_LOADED_MODELS` | `2` | Guarantee the completion and chat models can be resident together. |
+| `OLLAMA_FLASH_ATTENTION` | `1` | Tiled attention implementation: same outputs, less memory, faster at long context. Required for KV cache quantization. |
+| `OLLAMA_KV_CACHE_TYPE` | `q8_0` | Store the KV cache in 8-bit instead of f16, roughly halving its memory footprint with negligible quality loss. Matters because the cache is allocated per loaded model and the chat model's can run to multiple GB. |
+
+`OLLAMA_KEEP_ALIVE` and `OLLAMA_MAX_LOADED_MODELS` can be overridden by
+exporting them before running the script.
+
+> **Important:** `brew upgrade ollama` regenerates the plist and silently
+> wipes all of these settings. Re-run the script after every upgrade (it's
+> idempotent). Symptoms of a stale plist: completions lag because the model
+> cold-starts, or `ollama --version` reports a client/server version
+> mismatch because the service is still running the old binary.
 
 ## Key Mappings
 

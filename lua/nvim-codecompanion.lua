@@ -80,7 +80,8 @@ require("codecompanion").setup({
           },
           schema = {
             model = {
-              default = "gemma4",
+              -- default = "gemma4",
+              default = "qwen3.6:35b-a3b-nvfp4",
             },
           },
           headers = {
