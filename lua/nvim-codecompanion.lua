@@ -49,8 +49,8 @@ require("codecompanion").setup({
       -- adapter = "gemini",
       -- adapter = "openai",
       -- adapter = "apfel",
-      -- adapter = "opencode",
-      adapter = "ollama",
+      -- adapter = "ollama",
+      adapter = "opencode",
     },
     inline = {
       adapter = "gemini",
@@ -59,6 +59,9 @@ require("codecompanion").setup({
   adapters = {
     acp = {
       opencode = "opencode",
+      -- Uses the existing `claude` login (subscription) unless
+      -- CLAUDE_CODE_OAUTH_TOKEN or ANTHROPIC_API_KEY is exported.
+      claude_code = "claude_code",
     },
     http = {
       openai = function()
@@ -81,7 +84,18 @@ require("codecompanion").setup({
           schema = {
             model = {
               -- default = "gemma4",
-              default = "qwen3.6:35b-a3b-nvfp4",
+              -- default = "qwen3.6:35b-a3b-nvfp4",
+              default = "qwen3.5:9b",
+            },
+            -- 6GB GPU: offload 14 of 34 layers (the rest runs on CPU).
+            -- Higher is faster but leaves no VRAM headroom for the desktop.
+            num_gpu = {
+              order = 10,
+              mapping = "parameters.options",
+              type = "number",
+              optional = true,
+              default = 14,
+              desc = "Number of model layers to offload to the GPU.",
             },
           },
           headers = {

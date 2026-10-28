@@ -3,6 +3,10 @@
 -- Neovim's built-in vim.treesitter; this plugin is now a parser/query manager.
 require('nvim-treesitter').setup()
 
+-- Parsers that plugins depend on (no-op once installed).
+-- codecompanion needs yaml to parse prompt library frontmatter.
+require('nvim-treesitter').install({ 'yaml' })
+
 -- Enable treesitter highlighting and indent for every filetype that has a parser.
 vim.api.nvim_create_autocmd('FileType', {
   callback = function(args)

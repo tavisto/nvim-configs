@@ -112,9 +112,6 @@ else
   " Mermaid Diagrams
   call minpac#add('zhaozg/vim-diagram')
 
-  " Splunk config files and SPL
-  call minpac#add('yorokobi/vim-splunk')
-
   " EditorConfig support
   call minpac#add('editorconfig/editorconfig-vim')
 
@@ -155,6 +152,7 @@ else
 
   " AI Tools
   call minpac#add('olimorris/codecompanion.nvim')
+  call minpac#add('coder/claudecode.nvim')
 
   " Outline view
   call minpac#add('stevearc/aerial.nvim')
@@ -467,6 +465,7 @@ require('nvim-lint')
 require('nvim-notify')
 
 require('nvim-codecompanion')
+require('claudecode-config')
 require('minuet-config')
 require('nvim-telescope')
 require('nvim-aerial')
